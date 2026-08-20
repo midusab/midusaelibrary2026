@@ -169,25 +169,25 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-3 sm:p-4 font-sans text-slate-100">
+    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-3 sm:p-4 font-sans text-slate-800">
       <div 
-        className="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity animate-fadeIn"
+        className="fixed inset-0 bg-slate-50/80 backdrop-blur-md transition-opacity animate-fadeIn"
         onClick={step === 'push_sent' ? undefined : onClose}
       />
 
-      <div className="relative w-full max-w-lg bg-[#0F172A] rounded-3xl border border-slate-800 shadow-2xl overflow-hidden z-10 animate-scaleIn my-auto">
+      <div className="relative w-full max-w-lg bg-slate-50 rounded-3xl border border-slate-200 shadow-2xl overflow-hidden z-10 animate-scaleIn my-auto">
         
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
+        <div className="px-6 py-5 border-b border-slate-200 flex items-center justify-between bg-slate-100/90">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shadow-md">
+            <div className="w-10 h-10 rounded-xl bg-dodgerblue text-white flex items-center justify-center font-bold text-sm shadow-md">
               M
             </div>
             <div>
-              <h3 className="font-heading font-extrabold text-base sm:text-lg text-white">
+              <h3 className="font-heading font-extrabold text-base sm:text-lg text-slate-900">
                 {step === 'success' ? 'Payment Confirmed' : 'Lipa na M-Pesa (KES 100)'}
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 {step === 'success' ? 'Unique PDF download link ready' : 'Direct STK Push Prompt'}
               </p>
             </div>
@@ -196,7 +196,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
           {step !== 'push_sent' && (
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -211,23 +211,23 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
             <form onSubmit={handleInitiatePayment} className="space-y-4">
               
               {/* Order Summary Box */}
-              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center gap-4">
+              <div className="p-4 rounded-2xl bg-slate-100/80 border border-slate-200 flex items-center gap-4">
                 <div className="shrink-0 w-12 h-16 rounded-md overflow-hidden shadow-xs">
                   <BookCover book={booksToBuy[0]} size="xs" showBadge={false} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-[10px] uppercase font-bold text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded border border-blue-500/20">
+                  <span className="text-[10px] uppercase font-bold text-dodgerblue bg-dodgerblue/10 px-2.5 py-0.5 rounded border border-dodgerblue/20">
                     {booksToBuy.length > 1 ? `${booksToBuy.length} eBooks Selected` : booksToBuy[0].category}
                   </span>
-                  <h4 className="font-heading font-bold text-sm sm:text-base text-white truncate mt-1">
+                  <h4 className="font-heading font-bold text-sm sm:text-base text-slate-900 truncate mt-1">
                     {booksToBuy.length > 1 ? `${booksToBuy[0].title} + ${booksToBuy.length - 1} more` : booksToBuy[0].title}
                   </h4>
-                  <p className="text-xs text-slate-400 truncate">
+                  <p className="text-xs text-slate-500 truncate">
                     By {booksToBuy[0].author}
                   </p>
-                  <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-800">
-                    <span className="text-xs text-slate-400">Total:</span>
-                    <span className="text-base font-extrabold text-emerald-400">
+                  <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-200">
+                    <span className="text-xs text-slate-500">Total:</span>
+                    <span className="text-base font-extrabold text-dodgerblue">
                       {formatPrice(totalAmountKES)}
                     </span>
                   </div>
@@ -236,12 +236,12 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
 
               {/* Phone Input Field */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-slate-300">
+                <label className="block text-xs font-semibold text-slate-600">
                   Enter Safaricom M-Pesa Phone Number *
                 </label>
                 <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-slate-400 font-semibold text-xs border-r border-slate-800 pr-2.5">
-                    <Smartphone className="w-4 h-4 text-emerald-400" />
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-slate-500 font-semibold text-xs border-r border-slate-200 pr-2.5">
+                    <Smartphone className="w-4 h-4 text-dodgerblue" />
                     <span>+254</span>
                   </div>
                   <input
@@ -252,10 +252,10 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                       setPhoneNumber(e.target.value);
                       if (phoneError) setPhoneError('');
                     }}
-                    className={`w-full pl-22 pr-4 py-3 bg-slate-950 border rounded-xl text-sm font-semibold text-white placeholder-slate-500 focus:outline-hidden transition-colors ${
+                    className={`w-full pl-22 pr-4 py-3 bg-slate-50 border rounded-xl text-sm font-semibold text-slate-900 placeholder-slate-500 focus:outline-hidden transition-colors ${
                       phoneError
                         ? 'border-rose-500'
-                        : 'border-slate-800 focus:border-emerald-500'
+                        : 'border-slate-200 focus:border-dodgerblue'
                     }`}
                     autoFocus
                   />
@@ -263,15 +263,15 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                 {phoneError ? (
                   <p className="text-xs text-rose-400 font-medium">{phoneError}</p>
                 ) : (
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-500">
                     An STK push payment prompt will appear on this phone screen immediately.
                   </p>
                 )}
               </div>
 
               {/* Security Guarantee */}
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-dodgerblue/10 border border-dodgerblue/20 text-xs text-emerald-300">
+                <ShieldCheck className="w-4 h-4 text-dodgerblue shrink-0" />
                 <span>Instant STK push notification • Secure M-Pesa PIN prompt</span>
               </div>
 
@@ -279,7 +279,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
               <button
                 type="submit"
                 disabled={isProcessing}
-                className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 disabled:opacity-75 cursor-pointer"
+                className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-dodgerblue hover:bg-dodgerblue text-white shadow-lg shadow-dodgerblue/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 disabled:opacity-75 cursor-pointer"
               >
                 {isProcessing ? (
                   <>
@@ -300,38 +300,38 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
           {step === 'push_sent' && (
             <div className="space-y-5 text-center py-2 animate-fadeIn">
               
-              <div className="relative mx-auto w-20 h-20 rounded-3xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shadow-inner">
+              <div className="relative mx-auto w-20 h-20 rounded-3xl bg-dodgerblue/20 text-dodgerblue flex items-center justify-center shadow-inner">
                 <Smartphone className="w-10 h-10 animate-bounce" />
-                <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-emerald-600 text-white text-xs font-bold flex items-center justify-center ring-2 ring-[#0F172A]">
+                <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-dodgerblue text-white text-xs font-bold flex items-center justify-center ring-2 ring-[#0F172A]">
                   1
                 </span>
               </div>
 
               <div className="space-y-1.5">
-                <h4 className="text-lg font-heading font-extrabold text-white">
+                <h4 className="text-lg font-heading font-extrabold text-slate-900">
                   Prompt Sent to {phoneNumber}
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-400 max-w-xs mx-auto leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-500 max-w-xs mx-auto leading-relaxed">
                   Please check your phone screen. Enter your <strong>M-Pesa PIN</strong> to authorize the <strong>{formatPrice(totalAmountKES)}</strong> payment.
                 </p>
               </div>
 
               {/* Step checklist */}
-              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-left space-y-2.5 text-xs text-slate-300">
+              <div className="p-4 rounded-2xl bg-slate-100/80 border border-slate-200 text-left space-y-2.5 text-xs text-slate-600">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-dodgerblue text-white flex items-center justify-center text-xs font-bold shrink-0">
                     ✓
                   </div>
                   <span>STK push prompt dispatched to phone</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-dodgerblue text-white flex items-center justify-center text-xs font-bold shrink-0">
                     2
                   </div>
                   <span>Enter your 4-digit M-Pesa PIN & press OK</span>
                 </div>
                 <div className="flex items-center gap-2.5 text-slate-500">
-                  <div className="w-5 h-5 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold shrink-0">
                     3
                   </div>
                   <span>Unique download link is generated & saved to profile</span>
@@ -343,7 +343,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                   type="button"
                   onClick={handleConfirmPayment}
                   disabled={isProcessing}
-                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2.5 transition-all active:scale-98 cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-dodgerblue hover:bg-dodgerblue text-white shadow-lg shadow-dodgerblue/20 flex items-center justify-center gap-2.5 transition-all active:scale-98 cursor-pointer"
                 >
                   {isProcessing ? (
                     <>
@@ -366,7 +366,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep('input')}
-                    className="text-blue-400 hover:underline text-xs font-medium cursor-pointer"
+                    className="text-dodgerblue hover:underline text-xs font-medium cursor-pointer"
                   >
                     Change Phone Number
                   </button>
@@ -380,47 +380,47 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
           {step === 'success' && (
             <div className="space-y-4 text-center animate-fadeIn">
               
-              <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto shadow-xs">
+              <div className="w-16 h-16 rounded-2xl bg-dodgerblue/20 text-dodgerblue flex items-center justify-center mx-auto shadow-xs">
                 <CheckCircle2 className="w-9 h-9" />
               </div>
 
               <div className="space-y-1">
-                <h4 className="text-xl font-heading font-extrabold text-white">
+                <h4 className="text-xl font-heading font-extrabold text-slate-900">
                   Payment Successful!
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-400">
-                  M-Pesa Code: <span className="font-mono font-bold text-emerald-400">{generatedReceipt}</span> • {formatPrice(totalAmountKES)}
+                <p className="text-xs sm:text-sm text-slate-500">
+                  M-Pesa Code: <span className="font-mono font-bold text-dodgerblue">{generatedReceipt}</span> • {formatPrice(totalAmountKES)}
                 </p>
               </div>
 
-              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 text-left space-y-3">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-100/80 border border-slate-200 text-left space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-blue-400" />
+                  <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-dodgerblue" />
                     Your Unique PDF Download Link
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20 font-bold">
                     Active & Verified
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200">
                   <input
                     type="text"
                     readOnly
                     value={getDownloadUrl(generatedToken, booksToBuy[0].id)}
-                    className="w-full text-xs font-mono text-slate-300 bg-transparent outline-none truncate"
+                    className="w-full text-xs font-mono text-slate-600 bg-transparent outline-none truncate"
                   />
                   <button
                     onClick={() => handleCopyLink(getDownloadUrl(generatedToken, booksToBuy[0].id))}
-                    className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 shrink-0 transition-colors cursor-pointer"
+                    className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200 shrink-0 transition-colors cursor-pointer"
                     title="Copy download link"
                   >
-                    {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                    {copiedLink ? <Check className="w-4 h-4 text-dodgerblue" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
 
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-500 leading-relaxed">
                   ✓ This download link has been <strong>automatically saved to your Account Profile library</strong> for permanent lifetime access.
                 </p>
               </div>
@@ -428,7 +428,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
               <div className="space-y-2.5 pt-1">
                 <button
                   onClick={() => handleDownloadNow(booksToBuy[0])}
-                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-dodgerblue hover:bg-dodgerblue text-white shadow-lg shadow-dodgerblue/20 flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
                 >
                   <Download className="w-5 h-5" />
                   <span>Download PDF Now</span>
@@ -439,7 +439,7 @@ export const MpesaPaymentModal: React.FC<MpesaPaymentModalProps> = ({
                     onClose();
                     onNavigateToProfile();
                   }}
-                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-dodgerblue hover:bg-dodgerblue text-white shadow-md shadow-dodgerblue/20 flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
                 >
                   <User className="w-5 h-5" />
                   <span>View in My Account Library</span>

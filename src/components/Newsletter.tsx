@@ -24,7 +24,7 @@ export const Newsletter: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Banner Box */}
-        <div className="rounded-3xl p-6 sm:p-10 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg text-center space-y-4">
+        <div className="rounded-3xl p-6 sm:p-10 bg-gradient-to-r from-dodgerblue to-indigo-600 text-slate-900 shadow-lg text-center space-y-4">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold tracking-tight">
             Stay Updated on New Releases
           </h2>
@@ -46,7 +46,7 @@ export const Newsletter: React.FC = () => {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto pt-2">
               <div className="relative flex-1">
-                <Mail className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-5 h-5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   required
@@ -58,7 +58,7 @@ export const Newsletter: React.FC = () => {
               </div>
               <button
                 type="submit"
-                className="px-6 py-3 rounded-xl font-body font-medium text-sm bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                className="px-6 py-3 rounded-xl font-body font-medium text-sm bg-slate-100 hover:bg-slate-200 text-slate-900 flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
                 <span>Subscribe</span>
                 <ArrowRight className="w-4 h-4" />

@@ -161,21 +161,21 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
   };
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-[#0B0F19] text-slate-100 font-sans">
+    <div className="pt-24 pb-16 min-h-screen bg-white text-slate-800 font-sans">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Navigation Top Bar */}
-        <div className="flex items-center justify-between py-4 mb-6 border-b border-slate-800">
+        <div className="flex items-center justify-between py-4 mb-6 border-b border-slate-200">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 bg-slate-900 hover:bg-slate-800 border border-slate-800 shadow-sm transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 border border-slate-200 shadow-sm transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-blue-400" />
+            <ArrowLeft className="w-4 h-4 text-dodgerblue" />
             <span>Back to Store</span>
           </button>
 
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-semibold">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-semibold">
+            <ShieldCheck className="w-4 h-4 text-dodgerblue" />
             <span>Account Profile & Library</span>
           </div>
         </div>
@@ -185,27 +185,27 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
           <div className="space-y-6">
             
             {/* User Profile Header Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0F172A] border border-slate-800 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div className="flex items-center gap-4">
                 <img
                   src={currentUser.avatar}
                   alt={currentUser.name}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover ring-2 ring-blue-500/30 border border-slate-700"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover ring-2 ring-dodgerblue/30 border border-slate-300"
                 />
                 <div>
                   <div className="flex items-center gap-2.5">
-                    <h1 className="text-xl sm:text-2xl lg:text-3xl font-heading font-extrabold text-white tracking-tight">
+                    <h1 className="text-xl sm:text-2xl lg:text-3xl font-heading font-extrabold text-slate-900 tracking-tight">
                       {currentUser.name}
                     </h1>
-                    <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
+                    <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20 font-mono">
                       Verified Reader
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
+                  <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                     {currentUser.email}
                   </p>
-                  <div className="flex items-center gap-3 mt-2 text-xs text-slate-400">
-                    <span className="font-semibold text-blue-400">
+                  <div className="flex items-center gap-3 mt-2 text-xs text-slate-500">
+                    <span className="font-semibold text-dodgerblue">
                       {purchasedBooks.length} Purchased {purchasedBooks.length === 1 ? 'eBook' : 'eBooks'}
                     </span>
                     <span>•</span>
@@ -226,13 +226,13 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             </div>
 
             {/* Profile Navigation Tabs */}
-            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#0F172A] border border-slate-800 shadow-sm overflow-x-auto">
+            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm overflow-x-auto">
               <button
                 onClick={() => setActiveTab('library')}
                 className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   activeTab === 'library'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-dodgerblue text-white shadow-md shadow-dodgerblue/20'
+                    : 'text-slate-500 hover:bg-slate-200 hover:text-slate-900'
                 }`}
               >
                 <BookOpen className="w-4.5 h-4.5" />
@@ -243,8 +243,8 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                 onClick={() => setActiveTab('wishlist')}
                 className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   activeTab === 'wishlist'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-dodgerblue text-white shadow-md shadow-dodgerblue/20'
+                    : 'text-slate-500 hover:bg-slate-200 hover:text-slate-900'
                 }`}
               >
                 <Heart className="w-4.5 h-4.5" />
@@ -255,8 +255,8 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                 onClick={() => setActiveTab('orders')}
                 className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   activeTab === 'orders'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-dodgerblue text-white shadow-md shadow-dodgerblue/20'
+                    : 'text-slate-500 hover:bg-slate-200 hover:text-slate-900'
                 }`}
               >
                 <Receipt className="w-4.5 h-4.5" />
@@ -268,28 +268,28 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             {activeTab === 'library' && (
               <div className="space-y-4">
                 <div>
-                  <h2 className="text-lg sm:text-xl font-heading font-extrabold text-white">
+                  <h2 className="text-lg sm:text-xl font-heading font-extrabold text-slate-900">
                     Your Purchased eBooks
                   </h2>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-slate-500 mt-0.5">
                     Each eBook includes your verified M-Pesa receipt, in-browser reader, and secure unique download link.
                   </p>
                 </div>
 
                 {purchasedBooks.length === 0 ? (
-                  <div className="p-8 sm:p-12 rounded-3xl bg-[#0F172A] border border-slate-800 text-center space-y-4 shadow-xl">
-                    <div className="w-16 h-16 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center mx-auto border border-blue-500/20">
+                  <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-4 shadow-xl">
+                    <div className="w-16 h-16 rounded-2xl bg-dodgerblue/10 text-dodgerblue flex items-center justify-center mx-auto border border-dodgerblue/20">
                       <BookOpen className="w-8 h-8" />
                     </div>
                     <div className="space-y-1.5">
-                      <h3 className="font-heading font-extrabold text-white text-lg">No Purchased eBooks Yet</h3>
-                      <p className="text-xs sm:text-sm text-slate-400 max-w-sm mx-auto leading-relaxed">
+                      <h3 className="font-heading font-extrabold text-slate-900 text-lg">No Purchased eBooks Yet</h3>
+                      <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto leading-relaxed">
                         When you buy an eBook with M-Pesa, your unique download link is instantly saved right here in your account profile.
                       </p>
                     </div>
                     <button
                       onClick={onBack}
-                      className="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 transition-transform active:scale-95 cursor-pointer"
+                      className="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-dodgerblue hover:bg-dodgerblue text-white shadow-md shadow-dodgerblue/20 transition-transform active:scale-95 cursor-pointer"
                     >
                       Browse Bookstore Catalog
                     </button>
@@ -299,7 +299,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                     {purchasedBooks.map((item) => (
                       <div
                         key={item.id}
-                        className="p-5 sm:p-6 rounded-3xl bg-[#0F172A] border border-slate-800 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-5 hover:border-slate-700 transition-colors"
+                        className="p-5 sm:p-6 rounded-3xl bg-slate-50 border border-slate-200 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-5 hover:border-slate-300 transition-colors"
                       >
                         {/* Left: Cover & Info */}
                         <div className="flex items-start gap-4 flex-1 min-w-0">
@@ -312,21 +312,21 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
 
                           <div className="flex-1 min-w-0 space-y-1.5">
                             <div className="flex flex-wrap items-center gap-2">
-                              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded border border-blue-500/20 font-mono">
+                              <span className="text-[10px] font-bold uppercase tracking-wider text-dodgerblue bg-dodgerblue/10 px-2.5 py-0.5 rounded border border-dodgerblue/20 font-mono">
                                 {item.book.category}
                               </span>
-                              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/20">
+                              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-dodgerblue/10 text-dodgerblue font-bold border border-dodgerblue/20">
                                 Receipt: {item.mpesaReceiptNumber}
                               </span>
                             </div>
 
                             <h3 
                               onClick={() => onSelectBook(item.book)}
-                              className="font-heading font-bold text-base sm:text-lg text-white truncate hover:text-blue-400 cursor-pointer pt-0.5"
+                              className="font-heading font-bold text-base sm:text-lg text-slate-900 truncate hover:text-dodgerblue cursor-pointer pt-0.5"
                             >
                               {item.book.title}
                             </h3>
-                            <p className="text-xs text-slate-400 truncate">
+                            <p className="text-xs text-slate-500 truncate">
                               By {item.book.author} • {item.book.fileSize} • High-Res PDF
                             </p>
                             <p className="text-[11px] text-slate-500 font-mono">
@@ -335,7 +335,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
 
                             {/* Unique Download Link Bar */}
                             <div className="pt-2">
-                              <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-950 border border-slate-800 max-w-lg">
+                              <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-200 max-w-lg">
                                 <span className="text-[10px] font-mono uppercase text-slate-500 font-bold shrink-0">
                                   Unique Link:
                                 </span>
@@ -343,15 +343,15 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                                   type="text"
                                   readOnly
                                   value={item.downloadUrl}
-                                  className="text-xs font-mono text-slate-300 bg-transparent outline-none truncate w-full"
+                                  className="text-xs font-mono text-slate-600 bg-transparent outline-none truncate w-full"
                                 />
                                 <button
                                   onClick={() => handleCopyLink(item)}
-                                  className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 shrink-0 transition-colors cursor-pointer"
+                                  className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200 shrink-0 transition-colors cursor-pointer"
                                   title="Copy unique download link"
                                 >
                                   {copiedLinkId === item.id ? (
-                                    <Check className="w-4 h-4 text-emerald-400" />
+                                    <Check className="w-4 h-4 text-dodgerblue" />
                                   ) : (
                                     <Copy className="w-4 h-4" />
                                   )}
@@ -367,7 +367,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                           {onReadOnline && (
                             <button
                               onClick={() => onReadOnline(item.book)}
-                              className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 transition-transform active:scale-98 cursor-pointer"
+                              className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-dodgerblue hover:bg-dodgerblue text-white flex items-center justify-center gap-2 shadow-md shadow-dodgerblue/20 transition-transform active:scale-98 cursor-pointer"
                             >
                               <BookOpen className="w-4 h-4" />
                               <span>Read In-Browser</span>
@@ -377,7 +377,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                           <button
                             onClick={() => handleDownloadPDF(item)}
                             disabled={downloadingBookId === item.id}
-                            className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-98 cursor-pointer disabled:opacity-50"
+                            className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-dodgerblue hover:bg-dodgerblue text-white flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-98 cursor-pointer disabled:opacity-50"
                           >
                             {downloadingBookId === item.id ? (
                               <>
@@ -394,7 +394,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
 
                           <button
                             onClick={() => onSelectBook(item.book)}
-                            className="w-full py-2 px-3 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-800 border border-slate-800 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                            className="w-full py-2 px-3 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-200 border border-slate-200 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                           >
                             <span>Book Overview</span>
                           </button>
@@ -410,12 +410,12 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             {/* Tab 2: Saved Wishlist */}
             {activeTab === 'wishlist' && (
               <div className="space-y-4">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200">
                   <div>
-                    <h2 className="text-lg sm:text-xl font-heading font-extrabold text-white">
+                    <h2 className="text-lg sm:text-xl font-heading font-extrabold text-slate-900">
                       Saved Wishlist
                     </h2>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-xs text-slate-500 mt-0.5">
                       Books you've bookmarked to read or purchase next.
                     </p>
                   </div>
@@ -425,19 +425,19 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                 </div>
 
                 {wishlistBooks.length === 0 ? (
-                  <div className="p-8 sm:p-12 rounded-3xl bg-[#0F172A] border border-slate-800 text-center space-y-4 shadow-xl">
+                  <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-4 shadow-xl">
                     <div className="w-16 h-16 rounded-2xl bg-pink-500/10 text-pink-400 flex items-center justify-center mx-auto border border-pink-500/20">
                       <Heart className="w-8 h-8 fill-pink-500/20" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="font-heading font-extrabold text-white text-base">Your Wishlist is Empty</h3>
-                      <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
+                      <h3 className="font-heading font-extrabold text-slate-900 text-base">Your Wishlist is Empty</h3>
+                      <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
                         Click the heart icon on any eBook in the catalog to save titles you want to read later.
                       </p>
                     </div>
                     <button
                       onClick={onBack}
-                      className="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 transition-transform active:scale-95 cursor-pointer"
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold bg-dodgerblue hover:bg-dodgerblue text-white shadow-md shadow-dodgerblue/20 transition-transform active:scale-95 cursor-pointer"
                     >
                       Browse Books
                     </button>
@@ -447,7 +447,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                     {wishlistBooks.map((book) => (
                       <div
                         key={book.id}
-                        className="p-4 sm:p-5 rounded-2xl bg-[#0F172A] border border-slate-800 shadow-md hover:border-slate-700 transition-all flex flex-col justify-between"
+                        className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 shadow-md hover:border-slate-300 transition-all flex flex-col justify-between"
                       >
                         <div className="flex items-start gap-4">
                           <div 
@@ -458,21 +458,21 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <span className="text-[10px] font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20 uppercase font-mono">
+                            <span className="text-[10px] font-bold text-dodgerblue bg-dodgerblue/10 px-2 py-0.5 rounded border border-dodgerblue/20 uppercase font-mono">
                               {book.category}
                             </span>
                             <h4 
                               onClick={() => onSelectBook(book)}
-                              className="font-heading font-bold text-sm text-white truncate mt-1 hover:text-blue-400 cursor-pointer"
+                              className="font-heading font-bold text-sm text-slate-900 truncate mt-1 hover:text-dodgerblue cursor-pointer"
                             >
                               {book.title}
                             </h4>
-                            <p className="text-xs text-slate-400 truncate mt-0.5">
+                            <p className="text-xs text-slate-500 truncate mt-0.5">
                               By {book.author}
                             </p>
                             
                             <div className="flex items-baseline gap-2 mt-2">
-                              <span className="text-sm font-extrabold text-emerald-400">
+                              <span className="text-sm font-extrabold text-dodgerblue">
                                 {formatPrice(book.priceKES)}
                               </span>
                               <span className="text-xs text-slate-500 line-through">
@@ -483,10 +483,10 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                         </div>
 
                         {/* Action buttons */}
-                        <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-800">
+                        <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-200">
                           <button
                             onClick={() => onBuyNow(book)}
-                            className="py-2 px-3 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+                            className="py-2 px-3 rounded-xl text-xs font-bold bg-dodgerblue hover:bg-dodgerblue text-white flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                           >
                             <Zap className="w-3.5 h-3.5 fill-white" />
                             <span>Buy Now</span>
@@ -511,19 +511,19 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             {activeTab === 'orders' && (
               <div className="space-y-4">
                 <div>
-                  <h2 className="text-base sm:text-lg font-heading font-bold text-white">
+                  <h2 className="text-base sm:text-lg font-heading font-bold text-slate-900">
                     Order Invoices & Receipts
                   </h2>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-500">
                     Verified Kenyan Shillings M-Pesa Transactions
                   </p>
                 </div>
 
                 {orderTransactions.length === 0 ? (
-                  <div className="p-8 sm:p-12 rounded-3xl bg-[#0F172A] border border-slate-800 text-center space-y-3 shadow-xl">
+                  <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3 shadow-xl">
                     <Receipt className="w-10 h-10 text-slate-500 mx-auto" />
-                    <h3 className="font-heading font-extrabold text-white text-base">No Order Receipts Yet</h3>
-                    <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                    <h3 className="font-heading font-extrabold text-slate-900 text-base">No Order Receipts Yet</h3>
+                    <p className="text-xs text-slate-500 max-w-sm mx-auto">
                       All your M-Pesa payments and PDF orders will be documented here.
                     </p>
                   </div>
@@ -532,18 +532,18 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                     {orderTransactions.map((order) => (
                       <div 
                         key={order.orderId}
-                        className="p-5 rounded-2xl bg-[#0F172A] border border-slate-800 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                        className="p-5 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                       >
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-mono font-bold text-xs text-white">
+                            <span className="font-mono font-bold text-xs text-slate-900">
                               ORDER #{order.orderId}
                             </span>
-                            <span className="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold text-[10px] font-mono">
+                            <span className="px-2 py-0.5 rounded-md bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20 font-bold text-[10px] font-mono">
                               PAID • {order.mpesaReceiptNumber}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-300 mt-1">
+                          <p className="text-xs text-slate-600 mt-1">
                             {order.items.map((i) => i.bookTitle).join(', ')}
                           </p>
                           <span className="text-[11px] text-slate-500 font-mono">
@@ -552,10 +552,10 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                         </div>
 
                         <div className="text-right flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto">
-                          <span className="font-extrabold text-sm text-emerald-400">
+                          <span className="font-extrabold text-sm text-dodgerblue">
                             {formatPrice(order.amountKES)}
                           </span>
-                          <span className="text-[11px] text-emerald-400 font-medium">
+                          <span className="text-[11px] text-dodgerblue font-medium">
                             Unique Link Dispatched
                           </span>
                         </div>
@@ -570,24 +570,24 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
         ) : (
           /* If user is NOT logged in: Show clean Sign In / M-Pesa lookup screen */
           <div className="max-w-md mx-auto py-6">
-            <div className="p-8 rounded-3xl bg-[#0F172A] border border-slate-800 shadow-2xl text-center space-y-6">
+            <div className="p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-2xl text-center space-y-6">
               
               <div className="space-y-2">
-                <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center mx-auto shadow-md shadow-blue-500/20">
+                <div className="w-12 h-12 rounded-2xl bg-dodgerblue text-white flex items-center justify-center mx-auto shadow-md shadow-dodgerblue/20">
                   <User className="w-6 h-6" />
                 </div>
-                <h1 className="text-2xl font-heading font-extrabold text-white tracking-tight">
+                <h1 className="text-2xl font-heading font-extrabold text-slate-900 tracking-tight">
                   Sign In to Midusa
                 </h1>
-                <p className="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
+                <p className="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">
                   Access your purchased eBooks, manage your wishlist, and retrieve your unique download links anytime.
                 </p>
               </div>
 
               {/* M-Pesa Phone Quick Access */}
-              <form onSubmit={handleMpesaSignIn} className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-left space-y-2.5">
+              <form onSubmit={handleMpesaSignIn} className="p-4 rounded-2xl bg-dodgerblue/10 border border-dodgerblue/20 text-left space-y-2.5">
                 <label className="block text-xs font-bold text-emerald-300 flex items-center gap-1.5">
-                  <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
+                  <Smartphone className="w-3.5 h-3.5 text-dodgerblue" />
                   Quick Access via M-Pesa Phone
                 </label>
                 <div className="relative">
@@ -596,11 +596,11 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                     placeholder="e.g. 0712 345 678"
                     value={phoneLookup}
                     onChange={(e) => setPhoneLookup(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-semibold text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-500 focus:outline-none focus:border-dodgerblue"
                   />
                   <button
                     type="submit"
-                    className="mt-2 w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-colors cursor-pointer"
+                    className="mt-2 w-full py-2.5 px-3 bg-dodgerblue hover:bg-dodgerblue text-white font-bold text-xs rounded-xl shadow-md transition-colors cursor-pointer"
                   >
                     View My Purchased eBooks
                   </button>
@@ -608,9 +608,9 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
               </form>
 
               <div className="relative flex py-1 items-center">
-                <div className="flex-grow border-t border-slate-800"></div>
+                <div className="flex-grow border-t border-slate-200"></div>
                 <span className="flex-shrink mx-3 text-[11px] text-slate-500 uppercase font-medium">Or continue with</span>
-                <div className="flex-grow border-t border-slate-800"></div>
+                <div className="flex-grow border-t border-slate-200"></div>
               </div>
 
               {/* Social Login Buttons */}
@@ -619,10 +619,10 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                   type="button"
                   onClick={handleGoogleSignIn}
                   disabled={!!loadingProvider}
-                  className="w-full py-3 px-4 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 font-bold text-xs sm:text-sm text-slate-200 shadow-sm flex items-center justify-center gap-3 transition-all active:scale-98 disabled:opacity-50 cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 font-bold text-xs sm:text-sm text-slate-700 shadow-sm flex items-center justify-center gap-3 transition-all active:scale-98 disabled:opacity-50 cursor-pointer"
                 >
                   {loadingProvider === 'google' ? (
-                    <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-dodgerblue border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
                       <path
@@ -650,7 +650,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                   type="button"
                   onClick={handleFacebookSignIn}
                   disabled={!!loadingProvider}
-                  className="w-full py-3 px-4 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] font-bold text-xs sm:text-sm text-white shadow-sm flex items-center justify-center gap-3 transition-all active:scale-98 disabled:opacity-50 cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] font-bold text-xs sm:text-sm text-slate-900 shadow-sm flex items-center justify-center gap-3 transition-all active:scale-98 disabled:opacity-50 cursor-pointer"
                 >
                   {loadingProvider === 'facebook' ? (
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -665,7 +665,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
 
               <button
                 onClick={onBack}
-                className="text-xs text-slate-500 hover:text-slate-300 font-semibold cursor-pointer"
+                className="text-xs text-slate-500 hover:text-slate-600 font-semibold cursor-pointer"
               >
                 ← Return to Bookstore
               </button>

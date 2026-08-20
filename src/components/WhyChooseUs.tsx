@@ -99,7 +99,7 @@ export const WhyChooseUs: React.FC = () => {
                 </div>
 
                 <div className="pt-3.5 mt-4 border-t border-slate-100 flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-body font-normal">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <CheckCircle2 className="w-4 h-4 text-dodgerblue" />
                   <span>Guaranteed Quality</span>
                 </div>
               </div>

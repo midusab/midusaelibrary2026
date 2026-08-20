@@ -15,8 +15,8 @@ export const FaqSection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs sm:text-sm font-subheading font-semibold text-blue-700 mb-3">
-            <HelpCircle className="w-4 h-4 text-blue-600" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs sm:text-sm font-subheading font-semibold text-dodgerblue mb-3">
+            <HelpCircle className="w-4 h-4 text-dodgerblue" />
             <span>Got Questions?</span>
           </div>
 
@@ -44,7 +44,7 @@ export const FaqSection: React.FC = () => {
                   <span className="font-heading font-bold text-base sm:text-lg text-slate-900">
                     {faq.question}
                   </span>
-                  <div className={`p-2 rounded-xl transition-transform duration-300 ${isOpen ? 'rotate-180 text-blue-600 bg-blue-50' : 'bg-slate-100 text-slate-500'}`}>
+                  <div className={`p-2 rounded-xl transition-transform duration-300 ${isOpen ? 'rotate-180 text-dodgerblue bg-blue-50' : 'bg-slate-100 text-slate-500'}`}>
                     <ChevronDown className="w-5 h-5" />
                   </div>
                 </button>

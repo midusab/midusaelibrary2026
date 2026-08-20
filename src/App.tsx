@@ -14,7 +14,6 @@ import { BookDetailPage } from './components/BookDetailPage';
 import { UserProfilePage } from './components/UserProfilePage';
 import { CartDrawer } from './components/CartDrawer';
 import { WishlistDrawer } from './components/WishlistDrawer';
-import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { MpesaPaymentModal } from './components/MpesaPaymentModal';
 
 // Initial default purchased books for realistic instant testing
@@ -318,7 +317,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-500/20 selection:text-blue-700">
+    <div className="min-h-screen bg-white text-white flex flex-col selection:bg-dodgerblue/20 selection:text-dodgerblue">
       
       {/* Top Navigation Bar */}
       <Navbar
@@ -456,8 +455,6 @@ export default function App() {
         onNavigateToProfile={handleOpenProfile}
       />
 
-      {/* Floating WhatsApp Quick Concierge */}
-      <FloatingWhatsApp currentBookTitle={selectedBook?.title || BOOKS_DATA[0]?.title} />
 
     </div>
   );

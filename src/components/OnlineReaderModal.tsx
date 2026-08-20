@@ -168,13 +168,13 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
   // Theme styling definitions
   const themeStyles = {
     dark: {
-      bg: 'bg-[#0B0F19]',
-      panel: 'bg-[#0F172A]',
-      text: 'text-slate-200',
-      heading: 'text-white',
-      border: 'border-slate-800',
-      subtext: 'text-slate-400',
-      activeTab: 'bg-blue-600 text-white',
+      bg: 'bg-white',
+      panel: 'bg-slate-50',
+      text: 'text-slate-700',
+      heading: 'text-slate-900',
+      border: 'border-slate-200',
+      subtext: 'text-slate-500',
+      activeTab: 'bg-dodgerblue text-white',
     },
     light: {
       bg: 'bg-[#F8FAFC]',
@@ -183,7 +183,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
       heading: 'text-slate-900',
       border: 'border-slate-200',
       subtext: 'text-slate-500',
-      activeTab: 'bg-blue-600 text-white',
+      activeTab: 'bg-dodgerblue text-white',
     },
     sepia: {
       bg: 'bg-[#F5EADB]',
@@ -192,7 +192,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
       heading: 'text-[#2D2214]',
       border: 'border-[#DEC7AF]',
       subtext: 'text-[#7D6B57]',
-      activeTab: 'bg-[#9C7149] text-white',
+      activeTab: 'bg-[#9C7149] text-slate-900',
     },
   }[theme];
 
@@ -206,7 +206,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
         <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={onClose}
-            className="p-2 rounded-xl hover:bg-slate-800/30 transition-colors cursor-pointer"
+            className="p-2 rounded-xl hover:bg-slate-200/30 transition-colors cursor-pointer"
             title="Exit Reader"
           >
             <X className="w-5 h-5" />
@@ -223,8 +223,8 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
         </div>
 
         {/* Center: Reading Progress */}
-        <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full border border-slate-700/40 text-xs font-mono">
-          <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+        <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full border border-slate-300/40 text-xs font-mono">
+          <Sparkles className="w-3.5 h-3.5 text-dodgerblue" />
           <span>Progress: {readingProgress}%</span>
         </div>
 
@@ -232,7 +232,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
         <div className="flex items-center gap-1.5 sm:gap-2">
           
           {/* Font Resizing */}
-          <div className="flex items-center border rounded-lg border-slate-700/40 px-1 py-0.5">
+          <div className="flex items-center border rounded-lg border-slate-300/40 px-1 py-0.5">
             <button
               onClick={() => setFontSize(Math.max(14, fontSize - 2))}
               className="px-2 py-1 text-xs font-bold hover:opacity-75 transition-opacity"
@@ -240,7 +240,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
             >
               A-
             </button>
-            <span className="text-xs px-1 text-slate-400 font-mono">{fontSize}px</span>
+            <span className="text-xs px-1 text-slate-500 font-mono">{fontSize}px</span>
             <button
               onClick={() => setFontSize(Math.min(26, fontSize + 2))}
               className="px-2 py-1 text-xs font-bold hover:opacity-75 transition-opacity"
@@ -251,24 +251,24 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
           </div>
 
           {/* Theme Switcher */}
-          <div className="hidden sm:flex items-center border rounded-lg border-slate-700/40 p-0.5 gap-0.5">
+          <div className="hidden sm:flex items-center border rounded-lg border-slate-300/40 p-0.5 gap-0.5">
             <button
               onClick={() => setTheme('dark')}
-              className={`p-1.5 rounded-md transition-colors ${theme === 'dark' ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
+              className={`p-1.5 rounded-md transition-colors ${theme === 'dark' ? 'bg-slate-700 text-slate-900' : 'text-slate-500 hover:text-slate-900'}`}
               title="Dark Mode"
             >
               <Moon className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={() => setTheme('sepia')}
-              className={`p-1.5 rounded-md transition-colors ${theme === 'sepia' ? 'bg-[#9C7149] text-white' : 'text-slate-400 hover:text-white'}`}
+              className={`p-1.5 rounded-md transition-colors ${theme === 'sepia' ? 'bg-[#9C7149] text-slate-900' : 'text-slate-500 hover:text-slate-900'}`}
               title="Sepia Reading Mode"
             >
               <FileText className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={() => setTheme('light')}
-              className={`p-1.5 rounded-md transition-colors ${theme === 'light' ? 'bg-slate-200 text-slate-900' : 'text-slate-400 hover:text-white'}`}
+              className={`p-1.5 rounded-md transition-colors ${theme === 'light' ? 'bg-slate-200 text-slate-900' : 'text-slate-500 hover:text-slate-900'}`}
               title="Light Mode"
             >
               <Sun className="w-3.5 h-3.5" />
@@ -278,7 +278,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
           {/* Bookmark Button */}
           <button
             onClick={toggleBookmark}
-            className={`p-2 rounded-xl border border-slate-700/40 hover:opacity-80 transition-colors ${
+            className={`p-2 rounded-xl border border-slate-300/40 hover:opacity-80 transition-colors ${
               isCurrentBookmarked ? 'text-amber-400 bg-amber-400/10 border-amber-400/30' : ''
             }`}
             title={isCurrentBookmarked ? 'Remove Bookmark' : 'Bookmark Chapter'}
@@ -289,8 +289,8 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
           {/* Table of Contents & Notes Drawer Toggle */}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className={`p-2 rounded-xl border border-slate-700/40 hover:opacity-80 transition-colors ${
-              isSidebarOpen ? 'bg-blue-600 text-white' : ''
+            className={`p-2 rounded-xl border border-slate-300/40 hover:opacity-80 transition-colors ${
+              isSidebarOpen ? 'bg-dodgerblue text-white' : ''
             }`}
             title="Table of Contents & Notes"
           >
@@ -300,7 +300,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
           {/* Fullscreen Button */}
           <button
             onClick={toggleFullscreen}
-            className="hidden sm:inline-flex p-2 rounded-xl border border-slate-700/40 hover:opacity-80 transition-colors"
+            className="hidden sm:inline-flex p-2 rounded-xl border border-slate-300/40 hover:opacity-80 transition-colors"
             title="Toggle Fullscreen"
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -321,7 +321,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
             
             {/* Chapter Header */}
             <div className={`pb-6 border-b ${themeStyles.border} space-y-2`}>
-              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-blue-500">
+              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-dodgerblue">
                 <span>Chapter {currentChapter.chapterNumber} of {tableOfContents.length}</span>
                 <span>Pages {currentChapter.pages}</span>
               </div>
@@ -347,13 +347,13 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
 
             {/* Chapter Preview Gate Notice if locked */}
             {!currentChapter.previewAvailable && (
-              <div className="p-6 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-center space-y-4 my-8">
-                <Sparkles className="w-8 h-8 text-blue-400 mx-auto animate-pulse" />
+              <div className="p-6 rounded-2xl bg-dodgerblue/10 border border-dodgerblue/30 text-center space-y-4 my-8">
+                <Sparkles className="w-8 h-8 text-dodgerblue mx-auto animate-pulse" />
                 <div>
-                  <h4 className="font-heading font-bold text-lg text-slate-100">
+                  <h4 className="font-heading font-bold text-lg text-slate-800">
                     Full Unabridged Chapter Access
                   </h4>
-                  <p className="text-sm text-slate-400 max-w-md mx-auto mt-1">
+                  <p className="text-sm text-slate-500 max-w-md mx-auto mt-1">
                     You are previewing sample chapters. Unlock the full 300+ page high-resolution PDF download instantly for only KES 100 via M-Pesa.
                   </p>
                 </div>
@@ -363,7 +363,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
                       onClose();
                       onBuyNow(book);
                     }}
-                    className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-transform active:scale-95 cursor-pointer inline-flex items-center gap-2"
+                    className="px-6 py-3 rounded-xl bg-dodgerblue hover:bg-dodgerblue text-white font-bold text-sm shadow-md transition-transform active:scale-95 cursor-pointer inline-flex items-center gap-2"
                   >
                     <span>Unlock Full Book for KES 100</span>
                   </button>
@@ -387,7 +387,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
                 <span>Previous Chapter</span>
               </button>
 
-              <span className="text-xs font-mono text-slate-400">
+              <span className="text-xs font-mono text-slate-500">
                 {currentChapterIndex + 1} / {tableOfContents.length}
               </span>
 
@@ -417,7 +417,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
               <button
                 onClick={() => setActiveSidebarTab('toc')}
                 className={`flex-1 py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors ${
-                  activeSidebarTab === 'toc' ? themeStyles.activeTab : 'text-slate-400 hover:text-white'
+                  activeSidebarTab === 'toc' ? themeStyles.activeTab : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 <List className="w-3.5 h-3.5" />
@@ -427,7 +427,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
               <button
                 onClick={() => setActiveSidebarTab('bookmarks')}
                 className={`flex-1 py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors ${
-                  activeSidebarTab === 'bookmarks' ? themeStyles.activeTab : 'text-slate-400 hover:text-white'
+                  activeSidebarTab === 'bookmarks' ? themeStyles.activeTab : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 <Bookmark className="w-3.5 h-3.5" />
@@ -437,7 +437,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
               <button
                 onClick={() => setActiveSidebarTab('notes')}
                 className={`flex-1 py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors ${
-                  activeSidebarTab === 'notes' ? themeStyles.activeTab : 'text-slate-400 hover:text-white'
+                  activeSidebarTab === 'notes' ? themeStyles.activeTab : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 <Highlighter className="w-3.5 h-3.5" />
@@ -451,7 +451,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
               {/* 1. Table of Contents */}
               {activeSidebarTab === 'toc' && (
                 <div className="space-y-1.5">
-                  <p className="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Chapters</p>
+                  <p className="text-xs uppercase tracking-wider font-semibold text-slate-500 mb-2">Chapters</p>
                   {tableOfContents.map((chap, idx) => (
                     <button
                       key={chap.id}
@@ -461,12 +461,12 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
                       }}
                       className={`w-full text-left p-3 rounded-xl transition-all flex items-start justify-between gap-2 text-xs ${
                         idx === currentChapterIndex
-                          ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40 font-bold'
-                          : 'hover:bg-slate-800/40 text-slate-300'
+                          ? 'bg-dodgerblue/20 text-dodgerblue border border-dodgerblue/40 font-bold'
+                          : 'hover:bg-slate-200/40 text-slate-600'
                       }`}
                     >
                       <div>
-                        <div className="font-mono text-[10px] text-slate-400">Chapter {chap.chapterNumber}</div>
+                        <div className="font-mono text-[10px] text-slate-500">Chapter {chap.chapterNumber}</div>
                         <div className="mt-0.5">{chap.title}</div>
                       </div>
                       <span className="text-[10px] text-slate-500 shrink-0">{chap.pages}</span>
@@ -479,10 +479,10 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
               {activeSidebarTab === 'bookmarks' && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs uppercase tracking-wider font-semibold text-slate-400">Saved Bookmarks</p>
+                    <p className="text-xs uppercase tracking-wider font-semibold text-slate-500">Saved Bookmarks</p>
                     <button
                       onClick={toggleBookmark}
-                      className="text-xs text-blue-400 hover:underline flex items-center gap-1"
+                      className="text-xs text-dodgerblue hover:underline flex items-center gap-1"
                     >
                       <Plus className="w-3 h-3" />
                       <span>Bookmark current</span>
@@ -500,10 +500,10 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
                             contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
                           }
                         }}
-                        className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 cursor-pointer flex items-center justify-between group text-xs"
+                        className="p-3 rounded-xl bg-slate-100/60 border border-slate-200 hover:border-slate-300 cursor-pointer flex items-center justify-between group text-xs"
                       >
                         <div className="min-w-0 flex-1">
-                          <div className="font-semibold text-slate-200 truncate">{bm.title}</div>
+                          <div className="font-semibold text-slate-700 truncate">{bm.title}</div>
                           <div className="text-[10px] text-slate-500">{bm.timestamp}</div>
                         </div>
                         <button
@@ -518,7 +518,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
                       </div>
                     ))
                   ) : (
-                    <div className="text-center py-8 text-xs text-slate-400 space-y-1">
+                    <div className="text-center py-8 text-xs text-slate-500 space-y-1">
                       <Bookmark className="w-6 h-6 mx-auto text-slate-600" />
                       <p>No bookmarks added yet.</p>
                       <p className="text-[10px] text-slate-500">Click the bookmark ribbon at the top to save locations.</p>
@@ -531,18 +531,18 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
               {activeSidebarTab === 'notes' && (
                 <div className="space-y-4">
                   <form onSubmit={handleAddNote} className="space-y-2">
-                    <p className="text-xs uppercase tracking-wider font-semibold text-slate-400">Add Note to Chapter {currentChapter.chapterNumber}</p>
+                    <p className="text-xs uppercase tracking-wider font-semibold text-slate-500">Add Note to Chapter {currentChapter.chapterNumber}</p>
                     <textarea
                       value={noteInput}
                       onChange={(e) => setNoteInput(e.target.value)}
                       placeholder="Write your reflection, summary, or actionable insight here..."
                       rows={3}
-                      className="w-full p-2.5 text-xs rounded-xl bg-slate-900 border border-slate-800 text-slate-200 placeholder-slate-500 focus:outline-hidden focus:border-blue-500"
+                      className="w-full p-2.5 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-700 placeholder-slate-500 focus:outline-hidden focus:border-dodgerblue"
                     />
                     <button
                       type="submit"
                       disabled={!noteInput.trim()}
-                      className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold text-xs transition-colors cursor-pointer"
+                      className="w-full py-2 rounded-lg bg-dodgerblue hover:bg-dodgerblue disabled:opacity-50 text-white font-semibold text-xs transition-colors cursor-pointer"
                     >
                       Save Note
                     </button>
@@ -552,7 +552,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
                     {notes.map((note) => (
                       <div
                         key={note.id}
-                        className="p-3 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1 text-xs"
+                        className="p-3 rounded-xl bg-slate-100/70 border border-slate-200 space-y-1 text-xs"
                       >
                         <div className="flex items-center justify-between text-[10px] text-slate-500">
                           <span>{note.selectedText}</span>
@@ -563,7 +563,7 @@ export const OnlineReaderModal: React.FC<OnlineReaderModalProps> = ({
                             <Trash2 className="w-3 h-3" />
                           </button>
                         </div>
-                        <p className="text-slate-200 font-sans leading-relaxed">{note.note}</p>
+                        <p className="text-slate-700 font-sans leading-relaxed">{note.note}</p>
                         <div className="text-[9px] text-slate-500 text-right">{note.timestamp}</div>
                       </div>
                     ))}

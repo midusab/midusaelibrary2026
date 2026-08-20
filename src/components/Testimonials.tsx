@@ -9,8 +9,8 @@ export const Testimonials: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs sm:text-sm font-subheading font-semibold text-blue-700 mb-3">
-            <Sparkles className="w-4 h-4 text-blue-600" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs sm:text-sm font-subheading font-semibold text-dodgerblue mb-3">
+            <Sparkles className="w-4 h-4 text-dodgerblue" />
             <span>Trusted By 5,000+ Readers</span>
           </div>
 
@@ -27,7 +27,7 @@ export const Testimonials: React.FC = () => {
           {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
-              className="p-6 sm:p-8 rounded-2xl bg-slate-50/60 border border-slate-200/90 relative flex flex-col justify-between hover:border-blue-400 hover:shadow-md transition-all"
+              className="p-6 sm:p-8 rounded-2xl bg-slate-50/60 border border-slate-200/90 relative flex flex-col justify-between hover:border-dodgerblue hover:shadow-md transition-all"
             >
               <div className="space-y-4">
                 {/* Rating & Quote mark */}
@@ -47,8 +47,8 @@ export const Testimonials: React.FC = () => {
                 </p>
 
                 {/* Book Reference Tag */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm text-blue-700 font-subheading font-semibold shadow-xs">
-                  <BookOpen className="w-4 h-4 text-blue-600" />
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm text-dodgerblue font-subheading font-semibold shadow-xs">
+                  <BookOpen className="w-4 h-4 text-dodgerblue" />
                   <span>Purchased: {t.bookTitle}</span>
                 </div>
               </div>
@@ -63,13 +63,13 @@ export const Testimonials: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-1.5">
                     <h4 className="font-heading font-bold text-sm sm:text-base text-slate-900">{t.name}</h4>
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" title="Verified Reader" />
+                    <CheckCircle2 className="w-4 h-4 text-dodgerblue" title="Verified Reader" />
                   </div>
                   <p className="text-xs sm:text-sm font-body font-normal text-slate-500">
                     {t.role} • <span className="text-slate-700 font-subheading font-semibold">{t.company}</span>
                   </p>
                 </div>
-                <span className="ml-auto text-xs text-slate-400 font-body font-normal hidden sm:inline">
+                <span className="ml-auto text-xs text-slate-500 font-body font-normal hidden sm:inline">
                   {t.date}
                 </span>
               </div>

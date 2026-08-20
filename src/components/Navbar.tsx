@@ -28,10 +28,6 @@ interface NavbarProps {
   onOpenAuthModal: () => void;
   onOpenSearchModal: () => void;
   onNavigateHome: () => void;
-  onNavigateBestSellers: () => void;
-  onNavigateNewArrivals: () => void;
-  onNavigateAbout: () => void;
-  onNavigateContact: () => void;
   onSelectCategory: (category: BookCategory | 'All') => void;
   selectedCategory: BookCategory | 'All';
   currentUser: UserProfile | null;
@@ -47,10 +43,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenAuthModal,
   onOpenSearchModal,
   onNavigateHome,
-  onNavigateBestSellers,
-  onNavigateNewArrivals,
-  onNavigateAbout,
-  onNavigateContact,
   onSelectCategory,
   selectedCategory,
   currentUser,
@@ -72,8 +64,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
         isScrolled
-          ? 'bg-[#0B0F19]/90 backdrop-blur-xl border-b border-slate-800/90 shadow-lg shadow-black/20'
-          : 'bg-[#0B0F19]/75 backdrop-blur-md border-b border-slate-800/40'
+          ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/90 shadow-lg shadow-black/20'
+          : 'bg-white/75 backdrop-blur-md border-b border-slate-200/40'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,14 +77,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onNavigateHome}
               className="flex items-center gap-2.5 group cursor-pointer text-left"
             >
-              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/25 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-dodgerblue flex items-center justify-center text-white shadow-md shadow-dodgerblue/25 group-hover:scale-105 transition-transform">
                 <BookOpen className="w-5 h-5" />
               </div>
               <div>
-                <span className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight flex items-center gap-1">
-                  Midusa<span className="text-blue-500">Elibrary</span>
+                <span className="font-heading font-extrabold text-lg sm:text-xl text-slate-900 tracking-tight flex items-center gap-1">
+                  Midusa<span className="text-dodgerblue">Elibrary</span>
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 block -mt-1">
+                <span className="text-[10px] font-mono text-slate-500 block -mt-1">
                   KES 100 • Instant PDF
                 </span>
               </div>
@@ -100,12 +92,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* 2. Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center gap-1 font-body text-sm font-medium text-slate-300">
+          <nav className="hidden lg:flex items-center gap-1 font-body text-sm font-medium text-slate-600">
             
             {/* Home */}
             <button
               onClick={onNavigateHome}
-              className="px-3 py-2 rounded-lg hover:text-blue-400 hover:bg-slate-800/60 transition-colors cursor-pointer"
+              className="px-3 py-2 rounded-lg hover:text-dodgerblue hover:bg-slate-200/60 transition-colors cursor-pointer"
             >
               Home
             </button>
@@ -115,14 +107,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
                 onBlur={() => setTimeout(() => setIsCategoryDropdownOpen(false), 200)}
-                className="px-3 py-2 rounded-lg hover:text-blue-400 hover:bg-slate-800/60 transition-colors cursor-pointer flex items-center gap-1.5"
+                className="px-3 py-2 rounded-lg hover:text-dodgerblue hover:bg-slate-200/60 transition-colors cursor-pointer flex items-center gap-1.5"
               >
                 <span>Categories</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isCategoryDropdownOpen ? 'rotate-180 text-blue-400' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isCategoryDropdownOpen ? 'rotate-180 text-dodgerblue' : ''}`} />
               </button>
 
               {isCategoryDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-[#0F172A] border border-slate-800 rounded-2xl shadow-2xl p-2 z-50 animate-slideDown">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-slate-50 border border-slate-200 rounded-2xl shadow-2xl p-2 z-50 animate-slideDown">
                   <button
                     onClick={() => {
                       onSelectCategory('All');
@@ -130,13 +122,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                       onScrollToSection('catalog');
                     }}
                     className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors flex items-center justify-between ${
-                      selectedCategory === 'All' ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800'
+                      selectedCategory === 'All' ? 'bg-dodgerblue text-white' : 'text-slate-600 hover:bg-slate-200'
                     }`}
                   >
                     <span>All Genres (15 Titles)</span>
                     <Sparkles className="w-3.5 h-3.5" />
                   </button>
-                  <div className="my-1 border-t border-slate-800" />
+                  <div className="my-1 border-t border-slate-200" />
                   {CATEGORIES.map((cat) => (
                     <button
                       key={cat.id}
@@ -146,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         onScrollToSection('catalog');
                       }}
                       className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-colors flex items-center justify-between ${
-                        selectedCategory === cat.name ? 'bg-blue-600/20 text-blue-400 font-bold' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
+                        selectedCategory === cat.name ? 'bg-dodgerblue/20 text-dodgerblue font-bold' : 'text-slate-600 hover:bg-slate-200/80 hover:text-slate-900'
                       }`}
                     >
                       <span>{cat.name}</span>
@@ -156,53 +148,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
               )}
             </div>
-
-            {/* Best Sellers */}
-            <button
-              onClick={onNavigateBestSellers}
-              className="px-3 py-2 rounded-lg hover:text-blue-400 hover:bg-slate-800/60 transition-colors cursor-pointer flex items-center gap-1.5"
-            >
-              <Flame className="w-3.5 h-3.5 text-amber-400" />
-              <span>Best Sellers</span>
-            </button>
-
-            {/* New Arrivals */}
-            <button
-              onClick={onNavigateNewArrivals}
-              className="px-3 py-2 rounded-lg hover:text-blue-400 hover:bg-slate-800/60 transition-colors cursor-pointer flex items-center gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              <span>New Arrivals</span>
-            </button>
-
-            {/* About */}
-            <button
-              onClick={onNavigateAbout}
-              className="px-3 py-2 rounded-lg hover:text-blue-400 hover:bg-slate-800/60 transition-colors cursor-pointer"
-            >
-              About
-            </button>
-
-            {/* Contact */}
-            <button
-              onClick={onNavigateContact}
-              className="px-3 py-2 rounded-lg hover:text-blue-400 hover:bg-slate-800/60 transition-colors cursor-pointer"
-            >
-              Contact
-            </button>
           </nav>
 
-          {/* 3. Search Bar Trigger (Visible & Universal) */}
+            {/* Search Bar Trigger (Visible & Universal) */}
           <div className="flex-1 max-w-xs sm:max-w-sm mx-2">
             <button
               onClick={onOpenSearchModal}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-400 text-xs sm:text-sm flex items-center justify-between gap-2 transition-colors cursor-pointer shadow-inner"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-100/80 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 text-slate-500 text-xs sm:text-sm flex items-center justify-between gap-2 transition-colors cursor-pointer shadow-inner"
             >
               <div className="flex items-center gap-2 truncate">
-                <Search className="w-4 h-4 text-blue-400 shrink-0" />
+                <Search className="w-4 h-4 text-dodgerblue shrink-0" />
                 <span className="truncate">Search title, author, category...</span>
               </div>
-              <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-800 rounded border border-slate-700">
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-slate-500 bg-slate-200 rounded border border-slate-300">
                 /
               </kbd>
             </button>
@@ -214,12 +172,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Wishlist */}
             <button
               onClick={onOpenWishlist}
-              className="p-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition-colors relative cursor-pointer"
+              className="p-2.5 rounded-xl bg-slate-100/80 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 transition-colors relative cursor-pointer"
               title="Saved Wishlist"
             >
               <Heart className="w-4.5 h-4.5" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4.5 h-4.5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs animate-scaleUp">
+                <span className="absolute -top-1 -right-1 w-4.5 h-4.5 bg-rose-500 text-slate-900 text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs animate-scaleUp">
                   {wishlistCount}
                 </span>
               )}
@@ -228,12 +186,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Cart Button */}
             <button
               onClick={onOpenCart}
-              className="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-blue-500/20 transition-transform active:scale-95 cursor-pointer"
+              className="px-3 py-2 rounded-xl bg-dodgerblue hover:bg-dodgerblue text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-dodgerblue/20 transition-transform active:scale-95 cursor-pointer"
               title="View Cart"
             >
               <ShoppingCart className="w-4 h-4" />
               <span className="hidden sm:inline">Cart</span>
-              <span className="w-5 h-5 bg-white/20 text-white text-[11px] font-bold rounded-full flex items-center justify-center">
+              <span className="w-5 h-5 bg-white/20 text-slate-900 text-[11px] font-bold rounded-full flex items-center justify-center">
                 {cartCount}
               </span>
             </button>
@@ -242,7 +200,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {currentUser ? (
               <button
                 onClick={onOpenProfile}
-                className="flex items-center gap-2 p-1.5 pr-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-200 transition-colors cursor-pointer"
+                className="flex items-center gap-2 p-1.5 pr-2.5 rounded-xl bg-slate-100/80 hover:bg-slate-200 border border-slate-200 text-slate-700 transition-colors cursor-pointer"
                 title="Account & My Library"
               >
                 <img
@@ -257,9 +215,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <button
                 onClick={onOpenAuthModal}
-                className="p-2 sm:px-3 sm:py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="p-2 sm:px-3 sm:py-2 rounded-xl bg-slate-100/80 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                <LogIn className="w-4 h-4 text-blue-400" />
+                <LogIn className="w-4 h-4 text-dodgerblue" />
                 <span className="hidden sm:inline">Login</span>
               </button>
             )}
@@ -267,7 +225,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-white transition-colors"
+              className="lg:hidden p-2.5 rounded-xl bg-slate-100/80 border border-slate-200 text-slate-600 hover:text-slate-900 transition-colors"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -279,71 +237,27 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Slide-Out Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-16 bg-[#0B0F19]/95 backdrop-blur-2xl border-b border-slate-800 p-4 space-y-3 z-50 animate-slideDown shadow-2xl">
-          <div className="grid grid-cols-2 gap-2">
+        <div className="lg:hidden fixed inset-x-0 top-16 bg-white/95 backdrop-blur-2xl border-b border-slate-200 p-4 space-y-3 z-50 animate-slideDown shadow-2xl">
+          <div className="grid grid-cols-1 gap-2">
             <button
               onClick={() => {
                 onNavigateHome();
                 setIsMobileMenuOpen(false);
               }}
-              className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs font-semibold text-white flex items-center gap-2"
+              className="p-3 rounded-xl bg-slate-100 border border-slate-200 text-left text-xs font-semibold text-slate-900 flex items-center gap-2"
             >
-              <BookOpen className="w-4 h-4 text-blue-400" />
+              <BookOpen className="w-4 h-4 text-dodgerblue" />
               <span>Home</span>
-            </button>
-
-            <button
-              onClick={() => {
-                onNavigateBestSellers();
-                setIsMobileMenuOpen(false);
-              }}
-              className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs font-semibold text-white flex items-center gap-2"
-            >
-              <Flame className="w-4 h-4 text-amber-400" />
-              <span>Best Sellers</span>
-            </button>
-
-            <button
-              onClick={() => {
-                onNavigateNewArrivals();
-                setIsMobileMenuOpen(false);
-              }}
-              className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs font-semibold text-white flex items-center gap-2"
-            >
-              <Sparkles className="w-4 h-4 text-emerald-400" />
-              <span>New Arrivals</span>
-            </button>
-
-            <button
-              onClick={() => {
-                onNavigateAbout();
-                setIsMobileMenuOpen(false);
-              }}
-              className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs font-semibold text-white flex items-center gap-2"
-            >
-              <Info className="w-4 h-4 text-purple-400" />
-              <span>About Us</span>
             </button>
           </div>
 
-          <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
-            <button
-              onClick={() => {
-                onNavigateContact();
-                setIsMobileMenuOpen(false);
-              }}
-              className="text-xs font-semibold text-slate-300 hover:text-blue-400 flex items-center gap-1.5"
-            >
-              <Mail className="w-3.5 h-3.5" />
-              <span>Contact Support</span>
-            </button>
-
+          <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
             <button
               onClick={() => {
                 onOpenSearchModal();
                 setIsMobileMenuOpen(false);
               }}
-              className="text-xs font-semibold text-blue-400 flex items-center gap-1.5"
+              className="text-xs font-semibold text-dodgerblue flex items-center gap-1.5"
             >
               <Search className="w-3.5 h-3.5" />
               <span>Open Search</span>

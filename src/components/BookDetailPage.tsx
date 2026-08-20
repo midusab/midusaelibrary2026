@@ -117,14 +117,14 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
     .slice(0, 4);
 
   return (
-    <div className="pt-20 pb-20 min-h-screen bg-[#0B0F19] text-slate-100 font-sans">
+    <div className="pt-20 pb-20 min-h-screen bg-white text-slate-800 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center justify-between py-4 mb-6 border-b border-slate-800/80">
+        <div className="flex items-center justify-between py-4 mb-6 border-b border-slate-200/80">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to All Books</span>
@@ -136,7 +136,7 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                 isWishlisted
                   ? 'bg-rose-500/10 border-rose-500/30 text-rose-400'
-                  : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+                  : 'bg-slate-100 border-slate-200 text-slate-500 hover:text-slate-900'
               }`}
               title={isWishlisted ? 'Saved in Wishlist' : 'Add to Wishlist'}
             >
@@ -145,12 +145,12 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
             <button
               onClick={handleShare}
-              className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all cursor-pointer relative"
+              className="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-500 hover:text-slate-900 transition-all cursor-pointer relative"
               title="Share Book"
             >
               <Share2 className="w-4.5 h-4.5" />
               {copiedLink && (
-                <span className="absolute -top-8 right-0 px-2 py-1 bg-blue-600 text-[10px] text-white rounded-md shadow-md whitespace-nowrap animate-fadeIn">
+                <span className="absolute -top-8 right-0 px-2 py-1 bg-dodgerblue text-[10px] text-white rounded-md shadow-md whitespace-nowrap animate-fadeIn">
                   Link Copied!
                 </span>
               )}
@@ -163,7 +163,7 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
           
           {/* Left Column: 3D Book Cover Display */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="relative w-full max-w-sm p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800 flex items-center justify-center shadow-2xl">
+            <div className="relative w-full max-w-sm p-6 sm:p-8 rounded-3xl bg-slate-100/60 border border-slate-200 flex items-center justify-center shadow-2xl">
               <div className="w-56 sm:w-64">
                 <BookCover book={book} size="lg" showBadge={true} />
               </div>
@@ -173,7 +173,7 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
             <div className="w-full max-w-sm mt-4">
               <button
                 onClick={() => onOpenReader(book)}
-                className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-blue-400 hover:text-blue-300 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
+                className="w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300/80 text-dodgerblue hover:text-blue-300 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
               >
                 <BookOpen className="w-4 h-4" />
                 <span>Read Free Online Preview</span>
@@ -186,10 +186,10 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
             
             {/* Category & Verified Badge */}
             <div className="flex flex-wrap items-center gap-2.5">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20">
                 {book.category}
               </span>
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20 flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Verified Full PDF</span>
               </span>
@@ -200,48 +200,48 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
             {/* Title & Subtitle */}
             <div className="space-y-2">
-              <h1 className="text-2xl sm:text-4xl font-heading font-extrabold text-white tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-4xl font-heading font-extrabold text-slate-900 tracking-tight leading-tight">
                 {book.title}
               </h1>
-              <p className="text-base sm:text-lg text-slate-300 font-body leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-600 font-body leading-relaxed">
                 {book.subtitle}
               </p>
             </div>
 
             {/* Author & Star Rating */}
-            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-300 pb-4 border-b border-slate-800">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 pb-4 border-b border-slate-200">
               <div>
                 <span className="text-slate-500">By </span>
-                <span className="font-semibold text-white">{book.author}</span>
+                <span className="font-semibold text-slate-900">{book.author}</span>
               </div>
 
-              <div className="h-4 w-px bg-slate-800" />
+              <div className="h-4 w-px bg-slate-200" />
 
               <div className="flex items-center gap-1.5">
                 <div className="flex items-center text-amber-400">
                   <Star className="w-4 h-4 fill-amber-400" />
                 </div>
-                <span className="font-bold text-white">{book.rating}</span>
+                <span className="font-bold text-slate-900">{book.rating}</span>
                 <span className="text-slate-500">({reviews.length} reviews)</span>
               </div>
 
-              <div className="h-4 w-px bg-slate-800" />
+              <div className="h-4 w-px bg-slate-200" />
 
-              <div className="text-slate-400 text-xs font-mono">
+              <div className="text-slate-500 text-xs font-mono">
                 {book.pages} Pages • DRM-Free PDF
               </div>
             </div>
 
             {/* Price & Purchase Actions Card */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-5">
+            <div className="p-6 sm:p-7 rounded-3xl bg-slate-100/90 border border-slate-200 shadow-xl space-y-5">
               <div className="flex items-baseline gap-3">
-                <span className="text-3xl sm:text-4xl font-heading font-extrabold text-emerald-400">
+                <span className="text-3xl sm:text-4xl font-heading font-extrabold text-dodgerblue">
                   {formatPrice(book.priceKES)}
                 </span>
                 <span className="text-base text-slate-500 line-through font-body">
                   {formatPrice(book.originalPriceKES)}
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20">
                   67% OFF
                 </span>
               </div>
@@ -251,7 +251,7 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                 {/* Primary Buy Now */}
                 <button
                   onClick={() => onBuyNow(book)}
-                  className="w-full py-4 px-6 rounded-2xl font-heading font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 cursor-pointer"
+                  className="w-full py-4 px-6 rounded-2xl font-heading font-bold text-sm sm:text-base bg-dodgerblue hover:bg-dodgerblue text-white shadow-lg shadow-dodgerblue/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 cursor-pointer"
                 >
                   <Zap className="w-5 h-5 fill-white" />
                   <span>Buy Now</span>
@@ -260,7 +260,7 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                 {/* Add to Cart */}
                 <button
                   onClick={handleAddToCartClick}
-                  className="w-full py-4 px-6 rounded-2xl font-heading font-bold text-sm sm:text-base bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 cursor-pointer"
+                  className="w-full py-4 px-6 rounded-2xl font-heading font-bold text-sm sm:text-base bg-dodgerblue hover:bg-dodgerblue text-white shadow-lg shadow-dodgerblue/20 flex items-center justify-center gap-2.5 transition-transform active:scale-98 cursor-pointer"
                 >
                   {isAdded ? (
                     <>
@@ -277,9 +277,9 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               </div>
 
               {/* M-Pesa Guarantee */}
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+              <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
                 <span className="flex items-center gap-1.5">
-                  <Smartphone className="w-4 h-4 text-emerald-400" />
+                  <Smartphone className="w-4 h-4 text-dodgerblue" />
                   <span>Instant M-Pesa STK Push Download</span>
                 </span>
                 <span className="text-slate-500">Read on iPhone / Android / Kindle</span>
@@ -294,13 +294,13 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
         <div className="mt-12 space-y-8">
           
           {/* Section Navigation Tabs */}
-          <div className="flex border-b border-slate-800 overflow-x-auto gap-2 sm:gap-4 no-scrollbar">
+          <div className="flex border-b border-slate-200 overflow-x-auto gap-2 sm:gap-4 no-scrollbar">
             <button
               onClick={() => setActiveTab('overview')}
               className={`pb-3.5 px-3 text-sm font-heading font-bold transition-all border-b-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'overview'
-                  ? 'text-blue-400 border-blue-500'
-                  : 'text-slate-400 border-transparent hover:text-slate-200'
+                  ? 'text-dodgerblue border-dodgerblue'
+                  : 'text-slate-500 border-transparent hover:text-slate-700'
               }`}
             >
               Description & Takeaways
@@ -310,12 +310,12 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               onClick={() => setActiveTab('toc')}
               className={`pb-3.5 px-3 text-sm font-heading font-bold transition-all border-b-2 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                 activeTab === 'toc'
-                  ? 'text-blue-400 border-blue-500'
-                  : 'text-slate-400 border-transparent hover:text-slate-200'
+                  ? 'text-dodgerblue border-dodgerblue'
+                  : 'text-slate-500 border-transparent hover:text-slate-700'
               }`}
             >
               <span>Table of Contents</span>
-              <span className="px-2 py-0.5 text-[11px] rounded-full bg-slate-800 text-slate-300">
+              <span className="px-2 py-0.5 text-[11px] rounded-full bg-slate-200 text-slate-600">
                 {tableOfContents.length}
               </span>
             </button>
@@ -324,8 +324,8 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               onClick={() => setActiveTab('author')}
               className={`pb-3.5 px-3 text-sm font-heading font-bold transition-all border-b-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'author'
-                  ? 'text-blue-400 border-blue-500'
-                  : 'text-slate-400 border-transparent hover:text-slate-200'
+                  ? 'text-dodgerblue border-dodgerblue'
+                  : 'text-slate-500 border-transparent hover:text-slate-700'
               }`}
             >
               Author Information
@@ -335,12 +335,12 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               onClick={() => setActiveTab('reviews')}
               className={`pb-3.5 px-3 text-sm font-heading font-bold transition-all border-b-2 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                 activeTab === 'reviews'
-                  ? 'text-blue-400 border-blue-500'
-                  : 'text-slate-400 border-transparent hover:text-slate-200'
+                  ? 'text-dodgerblue border-dodgerblue'
+                  : 'text-slate-500 border-transparent hover:text-slate-700'
               }`}
             >
               <span>Reader Reviews</span>
-              <span className="px-2 py-0.5 text-[11px] rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <span className="px-2 py-0.5 text-[11px] rounded-full bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20">
                 {reviews.length}
               </span>
             </button>
@@ -351,28 +351,28 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               
               <div className="lg:col-span-7 space-y-6">
-                <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-4">
-                  <h3 className="font-heading font-bold text-xl text-white">About This Edition</h3>
-                  <p className="text-slate-300 font-body text-sm sm:text-base leading-relaxed">
+                <div className="p-6 sm:p-8 rounded-3xl bg-slate-100/60 border border-slate-200 space-y-4">
+                  <h3 className="font-heading font-bold text-xl text-slate-900">About This Edition</h3>
+                  <p className="text-slate-600 font-body text-sm sm:text-base leading-relaxed">
                     {book.description}
                   </p>
-                  <p className="text-slate-400 font-body text-sm leading-relaxed">
+                  <p className="text-slate-500 font-body text-sm leading-relaxed">
                     Formatted in pristine high-resolution PDF with clickable internal table of contents, high-contrast serif body typography, and optimized vector diagrams for instant reading on any screen size.
                   </p>
                 </div>
               </div>
 
               <div className="lg:col-span-5 space-y-6">
-                <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-4">
-                  <div className="flex items-center gap-2 text-emerald-400 font-heading font-bold text-base">
+                <div className="p-6 sm:p-8 rounded-3xl bg-slate-100/90 border border-slate-200 space-y-4">
+                  <div className="flex items-center gap-2 text-dodgerblue font-heading font-bold text-base">
                     <CheckCircle2 className="w-5 h-5" />
                     <span>Key Practical Takeaways</span>
                   </div>
 
                   <ul className="space-y-3">
                     {book.keyTakeaways.map((takeaway, i) => (
-                      <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-300">
-                        <span className="w-5 h-5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                      <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-600">
+                        <span className="w-5 h-5 rounded-full bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                           {i + 1}
                         </span>
                         <span className="leading-relaxed">{takeaway}</span>
@@ -387,15 +387,15 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
           {/* TAB 2: Table of Contents */}
           {activeTab === 'toc' && (
-            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-4">
+            <div className="p-6 sm:p-8 rounded-3xl bg-slate-100/60 border border-slate-200 space-y-4">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="font-heading font-bold text-xl text-white">Complete Table of Contents</h3>
-                  <p className="text-xs text-slate-400">Total {book.pages} Pages across {tableOfContents.length} structured chapters</p>
+                  <h3 className="font-heading font-bold text-xl text-slate-900">Complete Table of Contents</h3>
+                  <p className="text-xs text-slate-500">Total {book.pages} Pages across {tableOfContents.length} structured chapters</p>
                 </div>
                 <button
                   onClick={() => onOpenReader(book)}
-                  className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors flex items-center gap-2 cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-dodgerblue hover:bg-dodgerblue text-white font-semibold text-xs transition-colors flex items-center gap-2 cursor-pointer"
                 >
                   <BookOpen className="w-3.5 h-3.5" />
                   <span>Launch Reader</span>
@@ -406,11 +406,11 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                 {tableOfContents.map((chapter) => (
                   <div key={chapter.id} className="py-4 flex items-center justify-between gap-4">
                     <div className="flex items-start gap-3 min-w-0">
-                      <span className="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 text-xs font-mono font-bold flex items-center justify-center shrink-0">
+                      <span className="w-7 h-7 rounded-lg bg-slate-200 text-slate-600 text-xs font-mono font-bold flex items-center justify-center shrink-0">
                         {chapter.chapterNumber}
                       </span>
                       <div className="min-w-0">
-                        <h4 className="font-heading font-bold text-sm sm:text-base text-slate-100 truncate">
+                        <h4 className="font-heading font-bold text-sm sm:text-base text-slate-800 truncate">
                           {chapter.title}
                         </h4>
                         <span className="text-xs text-slate-500 font-mono">Pages {chapter.pages}</span>
@@ -419,11 +419,11 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
                     <div className="shrink-0 flex items-center gap-2">
                       {chapter.previewAvailable ? (
-                        <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-dodgerblue/10 text-dodgerblue border border-dodgerblue/20">
                           Preview Available
                         </span>
                       ) : (
-                        <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-800 text-slate-400">
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-200 text-slate-500">
                           Full Edition
                         </span>
                       )}
@@ -436,33 +436,33 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
           {/* TAB 3: Author Information */}
           {activeTab === 'author' && (
-            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-6">
+            <div className="p-6 sm:p-8 rounded-3xl bg-slate-100/60 border border-slate-200 space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center text-2xl font-bold font-heading">
+                <div className="w-16 h-16 rounded-2xl bg-dodgerblue/20 border border-dodgerblue/30 text-dodgerblue flex items-center justify-center text-2xl font-bold font-heading">
                   {book.author.charAt(0)}
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-2xl text-white">{book.author}</h3>
-                  <p className="text-xs text-blue-400 font-medium">{book.category} Author & Specialist</p>
+                  <h3 className="font-heading font-bold text-2xl text-slate-900">{book.author}</h3>
+                  <p className="text-xs text-dodgerblue font-medium">{book.category} Author & Specialist</p>
                 </div>
               </div>
 
-              <p className="text-slate-300 font-body text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 font-body text-sm sm:text-base leading-relaxed">
                 {book.authorBio || `${book.author} is an internationally recognized strategist, author, and researcher specializing in ${book.category.toLowerCase()} and high-performance execution. With over a decade of empirical research, their works have been translated into multiple languages and praised by enterprise leaders and operators worldwide.`}
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800 text-xs">
-                <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-200 text-xs">
+                <div className="p-4 rounded-xl bg-slate-100 border border-slate-200">
                   <div className="text-slate-500">Edition Year</div>
-                  <div className="font-bold text-white text-sm mt-1">{book.editionYear || book.publicationYear || 2026}</div>
+                  <div className="font-bold text-slate-900 text-sm mt-1">{book.editionYear || book.publicationYear || 2026}</div>
                 </div>
-                <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                <div className="p-4 rounded-xl bg-slate-100 border border-slate-200">
                   <div className="text-slate-500">Global Readership</div>
-                  <div className="font-bold text-white text-sm mt-1">45,000+ Readers</div>
+                  <div className="font-bold text-slate-900 text-sm mt-1">45,000+ Readers</div>
                 </div>
-                <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                <div className="p-4 rounded-xl bg-slate-100 border border-slate-200">
                   <div className="text-slate-500">Digital Format</div>
-                  <div className="font-bold text-emerald-400 text-sm mt-1">Standard 300 DPI PDF</div>
+                  <div className="font-bold text-dodgerblue text-sm mt-1">Standard 300 DPI PDF</div>
                 </div>
               </div>
             </div>
@@ -471,23 +471,23 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
           {/* TAB 4: Customer Reviews */}
           {activeTab === 'reviews' && (
             <div className="space-y-6">
-              <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="p-6 sm:p-8 rounded-3xl bg-slate-100/60 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="font-heading font-bold text-xl text-white">Verified Customer Ratings</h3>
+                  <h3 className="font-heading font-bold text-xl text-slate-900">Verified Customer Ratings</h3>
                   <div className="flex items-center gap-2 mt-1">
                     <div className="flex items-center text-amber-400">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-amber-400" />
                       ))}
                     </div>
-                    <span className="font-bold text-white">{book.rating} out of 5</span>
-                    <span className="text-slate-400 text-xs">({reviews.length} reviews)</span>
+                    <span className="font-bold text-slate-900">{book.rating} out of 5</span>
+                    <span className="text-slate-500 text-xs">({reviews.length} reviews)</span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => setIsReviewFormOpen(!isReviewFormOpen)}
-                  className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-colors cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-dodgerblue hover:bg-dodgerblue text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Write a Review</span>
@@ -496,28 +496,28 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
               {/* Interactive Leave a Review Form */}
               {isReviewFormOpen && (
-                <form onSubmit={handleAddReview} className="p-6 rounded-3xl bg-slate-900/90 border border-blue-500/40 shadow-xl space-y-4 animate-fadeIn">
-                  <h4 className="font-heading font-bold text-lg text-white">Share Your Feedback on this eBook</h4>
+                <form onSubmit={handleAddReview} className="p-6 rounded-3xl bg-slate-100/90 border border-dodgerblue/40 shadow-xl space-y-4 animate-fadeIn">
+                  <h4 className="font-heading font-bold text-lg text-slate-900">Share Your Feedback on this eBook</h4>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-slate-300">Your Name *</label>
+                      <label className="text-xs font-semibold text-slate-600">Your Name *</label>
                       <input
                         type="text"
                         required
                         value={newReviewerName}
                         onChange={(e) => setNewReviewerName(e.target.value)}
                         placeholder="e.g. Sarah Kimani"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs sm:text-sm focus:outline-hidden focus:border-blue-500"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs sm:text-sm focus:outline-hidden focus:border-dodgerblue"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-slate-300">Rating *</label>
+                      <label className="text-xs font-semibold text-slate-600">Rating *</label>
                       <select
                         value={newRating}
                         onChange={(e) => setNewRating(Number(e.target.value))}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs sm:text-sm focus:outline-hidden focus:border-blue-500"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs sm:text-sm focus:outline-hidden focus:border-dodgerblue"
                       >
                         <option value={5}>⭐⭐⭐⭐⭐ 5 Stars (Exceptional)</option>
                         <option value={4}>⭐⭐⭐⭐ 4 Stars (Very Good)</option>
@@ -527,25 +527,25 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">Review Title</label>
+                    <label className="text-xs font-semibold text-slate-600">Review Title</label>
                     <input
                       type="text"
                       value={newReviewTitle}
                       onChange={(e) => setNewReviewTitle(e.target.value)}
                       placeholder="e.g. Life-changing insights on compounding focus"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs sm:text-sm focus:outline-hidden focus:border-blue-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs sm:text-sm focus:outline-hidden focus:border-dodgerblue"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">Your Review *</label>
+                    <label className="text-xs font-semibold text-slate-600">Your Review *</label>
                     <textarea
                       required
                       rows={3}
                       value={newReviewComment}
                       onChange={(e) => setNewReviewComment(e.target.value)}
                       placeholder="What was the most valuable concept you learned from this book?"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs sm:text-sm focus:outline-hidden focus:border-blue-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs sm:text-sm focus:outline-hidden focus:border-dodgerblue"
                     />
                   </div>
 
@@ -553,13 +553,13 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsReviewFormOpen(false)}
-                      className="px-4 py-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white text-xs transition-colors cursor-pointer"
+                      className="px-4 py-2 rounded-xl bg-slate-200 text-slate-500 hover:text-slate-900 text-xs transition-colors cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors cursor-pointer flex items-center gap-1.5"
+                      className="px-5 py-2 rounded-xl bg-dodgerblue hover:bg-dodgerblue text-white font-semibold text-xs transition-colors cursor-pointer flex items-center gap-1.5"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>Post Review</span>
@@ -571,17 +571,17 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
               {/* Reviews List */}
               <div className="space-y-4">
                 {reviews.map((rev) => (
-                  <div key={rev.id} className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+                  <div key={rev.id} className="p-6 rounded-2xl bg-slate-100/60 border border-slate-200 space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 text-white text-xs font-bold flex items-center justify-center">
+                        <div className="w-9 h-9 rounded-full bg-slate-200 border border-slate-300 text-slate-900 text-xs font-bold flex items-center justify-center">
                           {rev.userName.charAt(0)}
                         </div>
                         <div>
-                          <div className="font-heading font-bold text-sm text-white flex items-center gap-2">
+                          <div className="font-heading font-bold text-sm text-slate-900 flex items-center gap-2">
                             <span>{rev.userName}</span>
                             {rev.verifiedPurchase && (
-                              <span className="text-[10px] font-semibold text-emerald-400 flex items-center gap-0.5">
+                              <span className="text-[10px] font-semibold text-dodgerblue flex items-center gap-0.5">
                                 <CheckCircle2 className="w-3 h-3" />
                                 <span>Verified Buyer</span>
                               </span>
@@ -598,8 +598,8 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                       </div>
                     </div>
 
-                    <h5 className="font-heading font-semibold text-slate-200 text-sm">{rev.title}</h5>
-                    <p className="text-xs sm:text-sm text-slate-300 font-body leading-relaxed">{rev.comment}</p>
+                    <h5 className="font-heading font-semibold text-slate-700 text-sm">{rev.title}</h5>
+                    <p className="text-xs sm:text-sm text-slate-600 font-body leading-relaxed">{rev.comment}</p>
                   </div>
                 ))}
               </div>
@@ -611,13 +611,13 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
 
         {/* 3. RELATED BOOKS SECTION */}
         {relatedBooks.length > 0 && (
-          <div className="mt-20 pt-12 border-t border-slate-800 space-y-6">
+          <div className="mt-20 pt-12 border-t border-slate-200 space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-heading font-bold text-xl sm:text-2xl text-white">
+                <h3 className="font-heading font-bold text-xl sm:text-2xl text-slate-900">
                   More in {book.category}
                 </h3>
-                <p className="text-xs text-slate-400">Readers who bought {book.title} also enjoyed these titles</p>
+                <p className="text-xs text-slate-500">Readers who bought {book.title} also enjoyed these titles</p>
               </div>
             </div>
 
@@ -626,22 +626,22 @@ export const BookDetailPage: React.FC<BookDetailPageProps> = ({
                 <div
                   key={relBook.id}
                   onClick={() => onSelectBook(relBook)}
-                  className="p-3 sm:p-4 rounded-2xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/40 transition-all cursor-pointer group flex flex-col justify-between"
+                  className="p-3 sm:p-4 rounded-2xl bg-slate-100/60 hover:bg-slate-100 border border-slate-200 hover:border-dodgerblue/40 transition-all cursor-pointer group flex flex-col justify-between"
                 >
                   <div className="w-full aspect-3/4 mb-3 rounded-lg overflow-hidden shadow-sm">
                     <BookCover book={relBook} size="md" showBadge={false} />
                   </div>
 
                   <div className="space-y-1">
-                    <h4 className="font-heading font-bold text-xs sm:text-sm text-slate-100 group-hover:text-blue-400 truncate">
+                    <h4 className="font-heading font-bold text-xs sm:text-sm text-slate-800 group-hover:text-dodgerblue truncate">
                       {relBook.title}
                     </h4>
-                    <p className="text-[11px] text-slate-400 truncate">By {relBook.author}</p>
+                    <p className="text-[11px] text-slate-500 truncate">By {relBook.author}</p>
                     <div className="flex items-center justify-between pt-2">
-                      <span className="font-bold text-emerald-400 text-xs">
+                      <span className="font-bold text-dodgerblue text-xs">
                         {formatPrice(relBook.priceKES)}
                       </span>
-                      <span className="text-[10px] text-blue-400 font-semibold group-hover:translate-x-0.5 transition-transform">
+                      <span className="text-[10px] text-dodgerblue font-semibold group-hover:translate-x-0.5 transition-transform">
                         View &rarr;
                       </span>
                     </div>

@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@theme {
+  --color-dodgerblue: #1E90FF;
+}
 
 @layer base {
   :root {
@@ -23,8 +26,8 @@
   body {
     font-family: var(--font-body);
     font-weight: 400;
-    color: #F1F5F9;
-    background-color: #0B0F19;
+    color: #0F172A;
+    background-color: #FFFFFF;
     font-size: 1rem; /* 16px standard baseline */
     line-height: 1.6;
     letter-spacing: -0.011em;

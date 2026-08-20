@@ -63,32 +63,32 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     <div className="fixed inset-0 z-50 overflow-hidden font-sans">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity animate-fadeIn"
+        className="absolute inset-0 bg-slate-50/80 backdrop-blur-md transition-opacity animate-fadeIn"
         onClick={onClose}
         aria-hidden="true"
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex">
-        <div className="w-screen max-w-md bg-[#0F172A] border-l border-slate-800 shadow-2xl flex flex-col h-full z-50 animate-slideLeft text-slate-100">
+        <div className="w-screen max-w-md bg-slate-50 border-l border-slate-200 shadow-2xl flex flex-col h-full z-50 animate-slideLeft text-slate-800">
           
           {/* Header */}
-          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-800 bg-slate-900/90">
+          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-200 bg-slate-100/90">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-blue-600/20 text-blue-400">
+              <div className="p-2 rounded-xl bg-dodgerblue/20 text-dodgerblue">
                 <ShoppingBag className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-heading font-extrabold text-white text-base sm:text-lg">
+                <h3 className="font-heading font-extrabold text-slate-900 text-base sm:text-lg">
                   Your Digital Cart
                 </h3>
-                <span className="text-xs text-slate-400 font-mono">
+                <span className="text-xs text-slate-500 font-mono">
                   {items.reduce((acc, item) => acc + item.quantity, 0)} Items Selected
                 </span>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -97,20 +97,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           {/* Drawer Body */}
           {items.length === 0 ? (
             <div className="flex-1 p-6 flex flex-col items-center justify-center text-center space-y-4">
-              <div className="w-16 h-16 rounded-3xl bg-slate-800/80 text-slate-500 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-3xl bg-slate-200/80 text-slate-500 flex items-center justify-center">
                 <ShoppingBag className="w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-lg font-heading font-bold text-white">
+                <h4 className="text-lg font-heading font-bold text-slate-900">
                   Your cart is empty
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-400 max-w-xs mt-1 font-body">
+                <p className="text-xs sm:text-sm text-slate-500 max-w-xs mt-1 font-body">
                   Add handpicked eBooks in Business, Psychology, Finance, and Self-Discipline for only KES 100 each.
                 </p>
               </div>
               <button
                 onClick={onClose}
-                className="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 cursor-pointer transition-transform active:scale-95"
+                className="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-dodgerblue hover:bg-dodgerblue text-white shadow-md shadow-dodgerblue/20 cursor-pointer transition-transform active:scale-95"
               >
                 Browse Books Catalog
               </button>
@@ -121,7 +121,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="flex-1 overflow-y-auto p-4 space-y-3">
                 
                 {/* Clear Cart Confirmation Header */}
-                <div className="flex items-center justify-between pb-2.5 border-b border-slate-800 text-xs text-slate-400 font-medium">
+                <div className="flex items-center justify-between pb-2.5 border-b border-slate-200 text-xs text-slate-500 font-medium">
                   <span>Selected Books</span>
                   {showClearConfirm ? (
                     <div className="flex items-center gap-2">
@@ -131,13 +131,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           onClearCart();
                           setShowClearConfirm(false);
                         }}
-                        className="px-2.5 py-1 rounded bg-rose-600 text-white font-bold text-xs cursor-pointer"
+                        className="px-2.5 py-1 rounded bg-rose-600 text-slate-900 font-bold text-xs cursor-pointer"
                       >
                         Yes
                       </button>
                       <button
                         onClick={() => setShowClearConfirm(false)}
-                        className="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs cursor-pointer"
+                        className="px-2.5 py-1 rounded bg-slate-200 text-slate-600 text-xs cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -156,7 +156,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 {items.map((item) => (
                   <div
                     key={item.book.id}
-                    className="p-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm flex items-center gap-3.5"
+                    className="p-3.5 rounded-2xl bg-slate-100/70 border border-slate-200 shadow-sm flex items-center gap-3.5"
                   >
                     {/* Thumbnail Cover */}
                     <div className="shrink-0 flex items-center justify-center w-12 h-16 rounded-md overflow-hidden">
@@ -165,18 +165,18 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
                     {/* Book Information */}
                     <div className="flex-1 min-w-0">
-                      <span className="text-[10px] font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded uppercase">
+                      <span className="text-[10px] font-bold text-dodgerblue bg-dodgerblue/10 px-2 py-0.5 rounded uppercase">
                         {item.book.category}
                       </span>
-                      <h4 className="font-heading font-bold text-sm text-slate-100 truncate mt-1">
+                      <h4 className="font-heading font-bold text-sm text-slate-800 truncate mt-1">
                         {item.book.title}
                       </h4>
-                      <p className="text-xs text-slate-400 truncate">
+                      <p className="text-xs text-slate-500 truncate">
                         By {item.book.author}
                       </p>
                       
                       <div className="flex items-center justify-between mt-1.5">
-                        <span className="font-extrabold text-sm text-emerald-400">
+                        <span className="font-extrabold text-sm text-dodgerblue">
                           {formatPrice(item.book.priceKES)}
                         </span>
                         <span className="text-[11px] text-slate-500 font-mono">
@@ -188,7 +188,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     {/* Remove item button */}
                     <button
                       onClick={() => onRemoveItem(item.book.id)}
-                      className="p-2 text-slate-500 hover:text-rose-400 hover:bg-slate-800 rounded-xl cursor-pointer transition-colors"
+                      className="p-2 text-slate-500 hover:text-rose-400 hover:bg-slate-200 rounded-xl cursor-pointer transition-colors"
                       title="Remove item"
                     >
                       <X className="w-4 h-4" />
@@ -198,18 +198,18 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
 
               {/* Checkout Calculation & Actions */}
-              <div className="p-4 sm:p-5 bg-slate-900/95 border-t border-slate-800 space-y-3.5">
+              <div className="p-4 sm:p-5 bg-slate-100/95 border-t border-slate-200 space-y-3.5">
                 <div className="space-y-1.5 text-xs sm:text-sm">
-                  <div className="flex justify-between text-slate-400">
+                  <div className="flex justify-between text-slate-500">
                     <span>Delivery Method</span>
-                    <span className="text-emerald-400 font-medium flex items-center gap-1">
+                    <span className="text-dodgerblue font-medium flex items-center gap-1">
                       <ShieldCheck className="w-3.5 h-3.5" />
                       <span>Instant STK Download Link</span>
                     </span>
                   </div>
-                  <div className="flex justify-between text-base sm:text-lg font-bold text-white pt-2 border-t border-slate-800">
+                  <div className="flex justify-between text-base sm:text-lg font-bold text-slate-900 pt-2 border-t border-slate-200">
                     <span>Total</span>
-                    <span className="text-emerald-400 font-extrabold">{formatPrice(totalKES)}</span>
+                    <span className="text-dodgerblue font-extrabold">{formatPrice(totalKES)}</span>
                   </div>
                 </div>
 
@@ -219,7 +219,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     onClose();
                     onCheckoutWithMpesa();
                   }}
-                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-600/20 transition-all active:scale-98 cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-sm sm:text-base bg-dodgerblue hover:bg-dodgerblue text-white flex items-center justify-center gap-2.5 shadow-lg shadow-dodgerblue/20 transition-all active:scale-98 cursor-pointer"
                 >
                   <Zap className="w-4.5 h-4.5 fill-white" />
                   <span>Checkout {formatPrice(totalKES)} via M-Pesa</span>
@@ -231,9 +231,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   href={generateCartWhatsAppUrl(items, totalKES)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center gap-2 transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-dodgerblue bg-dodgerblue/10 hover:bg-dodgerblue/20 border border-dodgerblue/20 flex items-center justify-center gap-2 transition-colors"
                 >
-                  <MessageSquare className="w-4 h-4 text-emerald-400" />
+                  <MessageSquare className="w-4 h-4 text-dodgerblue" />
                   <span>Order via WhatsApp Desk</span>
                 </a>
               </div>

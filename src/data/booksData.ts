@@ -19,7 +19,7 @@ export const CATEGORIES: CategoryInfo[] = [
     count: 1890,
     description: 'Strategic leadership, product-market fit, and operations.',
     accentColor: '#1E90FF',
-    gradient: 'from-blue-500/10 via-sky-500/5 to-transparent',
+    gradient: 'from-dodgerblue/10 via-sky-500/5 to-transparent',
   },
   {
     id: 'psych',
@@ -39,7 +39,7 @@ export const CATEGORIES: CategoryInfo[] = [
     count: 1740,
     description: 'Wealth compounding, smart investing, and money management.',
     accentColor: '#10B981',
-    gradient: 'from-emerald-500/10 via-teal-500/5 to-transparent',
+    gradient: 'from-dodgerblue/10 via-teal-500/5 to-transparent',
   },
   {
     id: 'entrep',

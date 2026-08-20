@@ -98,7 +98,7 @@ export const BookCover: React.FC<BookCoverProps> = ({
               <div className={`rounded-md bg-white/10 backdrop-blur-sm ${size === 'xs' ? 'p-0.5' : 'p-1'}`}>
                 {getCategoryIcon()}
               </div>
-              <span className={`font-semibold uppercase tracking-wider text-slate-200 ${
+              <span className={`font-semibold uppercase tracking-wider text-slate-700 ${
                 size === 'xs' ? 'text-[9px]' : 'text-xs'
               }`}>
                 {book.category}
@@ -113,7 +113,7 @@ export const BookCover: React.FC<BookCoverProps> = ({
 
           {/* Book Title */}
           <h4 
-            className={`font-bold tracking-tight text-white leading-snug drop-shadow-md ${
+            className={`font-bold tracking-tight text-slate-900 leading-snug drop-shadow-md ${
               size === 'xs' 
                 ? 'text-xs line-clamp-2 leading-tight' 
                 : size === 'sm' 
@@ -127,7 +127,7 @@ export const BookCover: React.FC<BookCoverProps> = ({
           </h4>
 
           {size !== 'sm' && size !== 'xs' && (
-            <p className="text-xs sm:text-sm text-slate-200/90 mt-1.5 line-clamp-2 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-700/90 mt-1.5 line-clamp-2 leading-relaxed">
               {book.subtitle}
             </p>
           )}
@@ -135,12 +135,12 @@ export const BookCover: React.FC<BookCoverProps> = ({
 
         {/* Footer: Author & Formats */}
         <div className={`border-t border-white/10 mt-auto ${size === 'xs' ? 'pt-1' : 'pt-2.5'}`}>
-          <div className="flex items-center justify-between text-xs text-slate-200">
+          <div className="flex items-center justify-between text-xs text-slate-700">
             <div>
               {size !== 'xs' && (
-                <p className="text-xs text-slate-400 uppercase tracking-widest font-mono">Author</p>
+                <p className="text-xs text-slate-500 uppercase tracking-widest font-mono">Author</p>
               )}
-              <p className={`font-semibold text-white truncate ${
+              <p className={`font-semibold text-slate-900 truncate ${
                 size === 'xs' ? 'text-[10px] max-w-[50px]' : 'text-xs sm:text-sm max-w-[120px] sm:max-w-[150px]'
               }`}>
                 {book.author}
@@ -157,7 +157,7 @@ export const BookCover: React.FC<BookCoverProps> = ({
 
           {/* Midusa Edition Watermark */}
           {size !== 'xs' && (
-            <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 text-[10px] text-slate-400 tracking-wider font-mono">
+            <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 text-[10px] text-slate-500 tracking-wider font-mono">
               <span>MIDUSA DIGITAL</span>
               <span>{book.publicationYear} ED.</span>
             </div>
