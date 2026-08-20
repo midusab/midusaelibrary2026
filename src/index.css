@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", -apple-system-body, "Segoe UI", Roboto, system-ui, sans-serif;
+    --font-subheading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-sf-mono: "SF Mono", Monaco, Menlo, Consolas, "JetBrains Mono", monospace;
+    --dodger-blue: #1E90FF;
+    --dodger-blue-hover: #0077ED;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Body Text → Inter Regular (400) */
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: #F1F5F9;
+    background-color: #0B0F19;
+    font-size: 1rem; /* 16px standard baseline */
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+  }
+  
+  /* Headings → SF Pro Display Bold (700) */
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+
+  /* Subheadings → Outfit SemiBold (600) */
+  .font-subheading, .subheading, [data-subheading="true"] {
+    font-family: var(--font-subheading);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  /* Body Text → Inter Regular (400) */
+  p, span, div, li, a, .font-body {
+    font-family: var(--font-body);
+  }
+
+  /* Buttons → Inter Medium (500) */
+  button, .btn, [role="button"], .font-button {
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    font-family: var(--font-body);
+  }
+}
+
+.text-dodgerblue {
+  color: #1E90FF;
+}
+
+.bg-dodgerblue {
+  background-color: #1E90FF;
+}
+
+.border-dodgerblue {
+  border-color: #1E90FF;
+}
+
+/* Custom font helper classes */
+.font-sf-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.font-outfit-subheading {
+  font-family: var(--font-subheading);
+  font-weight: 600;
+}
+
+.font-inter-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.font-inter-btn {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+/* =========================================================================
+   Apple Liquid Glass & Specular Refraction Styling
+   ========================================================================= */
+
+/* Translucent Liquid Glass Background Plate */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.06),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Liquid Glass Card with Specular Reflection */
+.liquid-glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.65) 100%);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 4px 20px -2px rgba(15, 23, 42, 0.05),
+    0 1px 3px 0 rgba(0, 0, 0, 0.02),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-card:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
+  border-color: rgba(30, 144, 255, 0.45);
+  box-shadow: 
+    0 16px 36px -6px rgba(30, 144, 255, 0.14),
+    0 4px 16px -2px rgba(15, 23, 42, 0.04),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+}
+
+/* Liquid Glass Nav Floating Bar */
+.liquid-glass-nav {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 10px 40px -10px rgba(0, 0, 0, 0.07),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Liquid Glass Pill / Badge */
+.liquid-glass-pill {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 2px 8px 0 rgba(0, 0, 0, 0.04),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Liquid Glass Button with Specular Sheen */
+.liquid-glass-btn {
+  position: relative;
+  background: linear-gradient(180deg, #1E90FF 0%, #0077ED 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 4px 14px 0 rgba(0, 119, 237, 0.35),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-btn:hover {
+  background: linear-gradient(180deg, #2A9AFF 0%, #006CE0 100%);
+  box-shadow: 
+    0 6px 20px 0 rgba(0, 119, 237, 0.45),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.liquid-glass-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px 0 rgba(0, 119, 237, 0.3);
+}
+
+/* Liquid Glass Secondary / White Button */
+.liquid-glass-btn-secondary {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 250, 0.85) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 2px 8px 0 rgba(15, 23, 42, 0.05),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+  color: #1E293B;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-btn-secondary:hover {
+  background: #FFFFFF;
+  border-color: rgba(30, 144, 255, 0.4);
+  color: #0077ED;
+  box-shadow: 
+    0 4px 14px 0 rgba(15, 23, 42, 0.08),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+/* Ambient Liquid Gradient Blobs */
+.liquid-blob-1 {
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.25) 0%, rgba(30, 144, 255, 0.12) 50%, transparent 70%);
+}
+
+.liquid-blob-2 {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.1) 50%, transparent 70%);
+}
+
+.liquid-blob-3 {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.08) 50%, transparent 70%);
+}
+
+/* 3D Book Perspective and Spine effects */
+.book-3d-wrapper {
+  perspective: 1200px;
+}
+
+.book-3d-card {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.book-3d-card:hover {
+  transform: translateY(-6px) rotateY(-6deg) rotateX(3deg);
+  box-shadow: -8px 16px 28px rgba(15, 23, 42, 0.2), 0 0 20px rgba(30, 144, 255, 0.18);
+}
+
+.book-spine-effect {
+  position: relative;
+}
+
+.book-spine-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 12px;
+  background: linear-gradient(to right, rgba(0,0,0,0.35), rgba(255,255,255,0.25) 30%, rgba(0,0,0,0.18));
+  border-radius: 4px 0 0 4px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Custom Scrollbar for iOS/macOS feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+/* Reader Typography styles */
+.reader-serif {
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+.reader-sans {
+  font-family: var(--font-sf);
+}
+
+.reader-mono {
+  font-family: var(--font-sf-mono);
+}
+
+/* Ambient animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.08);
+  }
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 7s ease-in-out 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+

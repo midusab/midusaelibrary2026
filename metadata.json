@@ -1,0 +1,8 @@
+{
+  "name": "Remix MidusaElibrary",
+  "description": "Modern digital bookstore offering premium eBooks in technology, business, self-development, finance, psychology, and academic resources.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
