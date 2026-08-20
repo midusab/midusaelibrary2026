@@ -14,6 +14,7 @@ import { BookDetailPage } from './components/BookDetailPage';
 import { UserProfilePage } from './components/UserProfilePage';
 import { CartDrawer } from './components/CartDrawer';
 import { WishlistDrawer } from './components/WishlistDrawer';
+import { AdminDashboard } from './components/AdminDashboard';
 import { MpesaPaymentModal } from './components/MpesaPaymentModal';
 
 // Initial default purchased books for realistic instant testing
@@ -327,6 +328,7 @@ export default function App() {
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenProfile={handleOpenProfile}
         onNavigateHome={handleNavigateHome}
+        onNavigateAdmin={() => setCurrentView('admin')}
         onSelectCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
         currentUser={currentUser}
@@ -412,6 +414,9 @@ export default function App() {
             onSelectBook={handleSelectBook}
             onBuyNow={handleStartBuyNow}
           />
+        )}
+        {currentView === 'admin' && (
+          <AdminDashboard onBack={handleNavigateHome} />
         )}
       </main>
 

@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
-import { UserProfile, Book, PurchasedBook, OrderTransaction } from '../types';
-import { formatPrice, generateWhatsAppUrl } from '../utils/helpers';
-import { BookCover } from './BookCover';
-import { 
-  ArrowLeft, 
-  User, 
-  LogOut, 
-  Download, 
-  Heart, 
-  BookOpen, 
-  ShoppingBag, 
-  CheckCircle2, 
-  ShieldCheck, 
-  FileText, 
-  Clock, 
-  Sparkles, 
-  ExternalLink, 
-  Receipt, 
-  ShoppingCart, 
+import React, { useState } from "react";
+import { UserProfile, Book, PurchasedBook, OrderTransaction } from "../types";
+import { formatPrice, generateWhatsAppUrl } from "../utils/helpers";
+import { BookCover } from "./BookCover";
+import { signInWithPopup } from "firebase/auth";
+import { auth, db, googleProvider } from "../lib/firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  ArrowLeft,
+  User,
+  LogOut,
+  Download,
+  Heart,
+  BookOpen,
+  ShoppingBag,
+  CheckCircle2,
+  ShieldCheck,
+  FileText,
+  Clock,
+  Sparkles,
+  ExternalLink,
+  Receipt,
+  ShoppingCart,
   Trash2,
   Copy,
   Check,
@@ -25,9 +28,9 @@ import {
   Search,
   Lock,
   Eye,
-  Zap
-} from 'lucide-react';
-import confetti from 'canvas-confetti';
+  Zap,
+} from "lucide-react";
+import confetti from "canvas-confetti";
 
 interface UserProfilePageProps {
   currentUser: UserProfile | null;
@@ -60,44 +63,71 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
   onBuyNow,
   onReadOnline,
 }) => {
-  const [activeTab, setActiveTab] = useState<'library' | 'wishlist' | 'orders'>('library');
-  const [loadingProvider, setLoadingProvider] = useState<'google' | 'facebook' | 'mpesa' | null>(null);
-  const [downloadingBookId, setDownloadingBookId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"library" | "wishlist" | "orders">(
+    "library",
+  );
+  const [loadingProvider, setLoadingProvider] = useState<
+    "google" | "facebook" | "mpesa" | null
+  >(null);
+  const [downloadingBookId, setDownloadingBookId] = useState<string | null>(
+    null,
+  );
   const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
-  const [phoneLookup, setPhoneLookup] = useState('');
+  const [phoneLookup, setPhoneLookup] = useState("");
 
   // 1-Click Google Login
-  const handleGoogleSignIn = () => {
-    setLoadingProvider('google');
-    setTimeout(() => {
+  const handleGoogleSignIn = async () => {
+    setLoadingProvider("google");
+    try {
+      const cred = await signInWithPopup(auth, googleProvider);
+      const user = cred.user;
+      
+      const email = user.email || "";
+      const isAdmin = email === "midusab@gmail.com";
+      const role = isAdmin ? "admin" : "user";
+      
+      // Update or create user document in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        email: email,
+        role: role,
+        createdAt: new Date(),
+      }, { merge: true });
+
       const profile: UserProfile = {
-        id: `google-${Date.now()}`,
-        name: 'Alex Kariuki',
-        email: 'alex.kariuki@gmail.com',
-        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&auto=format&fit=crop&q=80',
-        provider: 'google',
+        id: user.uid,
+        name: user.displayName || "User",
+        email: email,
+        avatar: user.photoURL || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&auto=format&fit=crop&q=80",
+        provider: "google",
+        isAdmin: isAdmin,
       };
+
       onLogin(profile);
-      setLoadingProvider(null);
       confetti({
         particleCount: 40,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#4285F4', '#34A853', '#FBBC05', '#EA4335'],
+        colors: ["#4285F4", "#34A853", "#FBBC05", "#EA4335"],
       });
-    }, 350);
+    } catch (err: any) {
+      console.error("Firebase Login Error:", err);
+      alert("Login failed: " + err.message);
+    } finally {
+      setLoadingProvider(null);
+    }
   };
 
   // 1-Click Facebook Login
   const handleFacebookSignIn = () => {
-    setLoadingProvider('facebook');
+    setLoadingProvider("facebook");
     setTimeout(() => {
       const profile: UserProfile = {
         id: `fb-${Date.now()}`,
-        name: 'Sarah Mwangi',
-        email: 'sarah.mwangi@facebook.com',
-        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80',
-        provider: 'facebook',
+        name: "Sarah Mwangi",
+        email: "sarah.mwangi@facebook.com",
+        avatar:
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+        provider: "facebook",
       };
       onLogin(profile);
       setLoadingProvider(null);
@@ -105,7 +135,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
         particleCount: 40,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#1877F2', '#42B72A', '#00F2FE'],
+        colors: ["#1877F2", "#42B72A", "#00F2FE"],
       });
     }, 350);
   };
@@ -114,7 +144,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
   const handleMpesaSignIn = (e: React.FormEvent) => {
     e.preventDefault();
     if (!phoneLookup.trim()) return;
-    setLoadingProvider('mpesa');
+    setLoadingProvider("mpesa");
 
     setTimeout(() => {
       const cleanPhone = phoneLookup.trim();
@@ -123,8 +153,9 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
         name: `M-Pesa (${cleanPhone})`,
         email: `${cleanPhone}@mpesa.midusa.co.ke`,
         phone: cleanPhone,
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
-        provider: 'mpesa',
+        avatar:
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+        provider: "mpesa",
       };
       onLogin(profile);
       setLoadingProvider(null);
@@ -132,7 +163,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
         particleCount: 40,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#10B981', '#059669', '#34D399'],
+        colors: ["#10B981", "#059669", "#34D399"],
       });
     }, 400);
   };
@@ -142,12 +173,15 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
     setDownloadingBookId(purchasedItem.id);
     setTimeout(() => {
       setDownloadingBookId(null);
-      const element = document.createElement('a');
-      const file = new Blob([
-        `%PDF-1.4\n1 0 obj\n<< /Title (${purchasedItem.book.title}) /Author (${purchasedItem.book.author}) >>\nendobj\n`
-      ], { type: 'application/pdf' });
+      const element = document.createElement("a");
+      const file = new Blob(
+        [
+          `%PDF-1.4\n1 0 obj\n<< /Title (${purchasedItem.book.title}) /Author (${purchasedItem.book.author}) >>\nendobj\n`,
+        ],
+        { type: "application/pdf" },
+      );
       element.href = URL.createObjectURL(file);
-      element.download = `${purchasedItem.book.title.replace(/\s+/g, '_')}_Midusa_eBook.pdf`;
+      element.download = `${purchasedItem.book.title.replace(/\s+/g, "_")}_Midusa_eBook.pdf`;
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
@@ -163,7 +197,6 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
   return (
     <div className="pt-24 pb-16 min-h-screen bg-white text-slate-800 font-sans">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Navigation Top Bar */}
         <div className="flex items-center justify-between py-4 mb-6 border-b border-slate-200">
           <button
@@ -183,7 +216,6 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
         {/* If user is logged in: Show full account dashboard */}
         {currentUser ? (
           <div className="space-y-6">
-            
             {/* User Profile Header Card */}
             <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div className="flex items-center gap-4">
@@ -206,7 +238,8 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                   </p>
                   <div className="flex items-center gap-3 mt-2 text-xs text-slate-500">
                     <span className="font-semibold text-dodgerblue">
-                      {purchasedBooks.length} Purchased {purchasedBooks.length === 1 ? 'eBook' : 'eBooks'}
+                      {purchasedBooks.length} Purchased{" "}
+                      {purchasedBooks.length === 1 ? "eBook" : "eBooks"}
                     </span>
                     <span>•</span>
                     <span>{wishlistBooks.length} in Wishlist</span>
@@ -228,11 +261,11 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             {/* Profile Navigation Tabs */}
             <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm overflow-x-auto">
               <button
-                onClick={() => setActiveTab('library')}
+                onClick={() => setActiveTab("library")}
                 className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                  activeTab === 'library'
-                    ? 'bg-dodgerblue text-white shadow-md shadow-dodgerblue/20'
-                    : 'text-slate-500 hover:bg-slate-200 hover:text-slate-900'
+                  activeTab === "library"
+                    ? "bg-dodgerblue text-white shadow-md shadow-dodgerblue/20"
+                    : "text-slate-500 hover:bg-slate-200 hover:text-slate-900"
                 }`}
               >
                 <BookOpen className="w-4.5 h-4.5" />
@@ -240,11 +273,11 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
               </button>
 
               <button
-                onClick={() => setActiveTab('wishlist')}
+                onClick={() => setActiveTab("wishlist")}
                 className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                  activeTab === 'wishlist'
-                    ? 'bg-dodgerblue text-white shadow-md shadow-dodgerblue/20'
-                    : 'text-slate-500 hover:bg-slate-200 hover:text-slate-900'
+                  activeTab === "wishlist"
+                    ? "bg-dodgerblue text-white shadow-md shadow-dodgerblue/20"
+                    : "text-slate-500 hover:bg-slate-200 hover:text-slate-900"
                 }`}
               >
                 <Heart className="w-4.5 h-4.5" />
@@ -252,11 +285,11 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
               </button>
 
               <button
-                onClick={() => setActiveTab('orders')}
+                onClick={() => setActiveTab("orders")}
                 className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                  activeTab === 'orders'
-                    ? 'bg-dodgerblue text-white shadow-md shadow-dodgerblue/20'
-                    : 'text-slate-500 hover:bg-slate-200 hover:text-slate-900'
+                  activeTab === "orders"
+                    ? "bg-dodgerblue text-white shadow-md shadow-dodgerblue/20"
+                    : "text-slate-500 hover:bg-slate-200 hover:text-slate-900"
                 }`}
               >
                 <Receipt className="w-4.5 h-4.5" />
@@ -265,14 +298,15 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             </div>
 
             {/* Tab 1: My eBooks Library */}
-            {activeTab === 'library' && (
+            {activeTab === "library" && (
               <div className="space-y-4">
                 <div>
                   <h2 className="text-lg sm:text-xl font-heading font-extrabold text-slate-900">
                     Your Purchased eBooks
                   </h2>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Each eBook includes your verified M-Pesa receipt, in-browser reader, and secure unique download link.
+                    Each eBook includes your verified M-Pesa receipt, in-browser
+                    reader, and secure unique download link.
                   </p>
                 </div>
 
@@ -282,9 +316,13 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                       <BookOpen className="w-8 h-8" />
                     </div>
                     <div className="space-y-1.5">
-                      <h3 className="font-heading font-extrabold text-slate-900 text-lg">No Purchased eBooks Yet</h3>
+                      <h3 className="font-heading font-extrabold text-slate-900 text-lg">
+                        No Purchased eBooks Yet
+                      </h3>
                       <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto leading-relaxed">
-                        When you buy an eBook with M-Pesa, your unique download link is instantly saved right here in your account profile.
+                        When you buy an eBook with M-Pesa, your unique download
+                        link is instantly saved right here in your account
+                        profile.
                       </p>
                     </div>
                     <button
@@ -303,7 +341,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                       >
                         {/* Left: Cover & Info */}
                         <div className="flex items-start gap-4 flex-1 min-w-0">
-                          <div 
+                          <div
                             onClick={() => onSelectBook(item.book)}
                             className="cursor-pointer shrink-0 w-16 h-22 rounded-md overflow-hidden"
                           >
@@ -320,17 +358,21 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                               </span>
                             </div>
 
-                            <h3 
+                            <h3
                               onClick={() => onSelectBook(item.book)}
                               className="font-heading font-bold text-base sm:text-lg text-slate-900 truncate hover:text-dodgerblue cursor-pointer pt-0.5"
                             >
                               {item.book.title}
                             </h3>
                             <p className="text-xs text-slate-500 truncate">
-                              By {item.book.author} • {item.book.fileSize} • High-Res PDF
+                              By {item.book.author} • {item.book.fileSize} •
+                              High-Res PDF
                             </p>
                             <p className="text-[11px] text-slate-500 font-mono">
-                              Purchased: {item.purchaseDate} {item.phoneNumber ? `• Phone: ${item.phoneNumber}` : ''}
+                              Purchased: {item.purchaseDate}{" "}
+                              {item.phoneNumber
+                                ? `• Phone: ${item.phoneNumber}`
+                                : ""}
                             </p>
 
                             {/* Unique Download Link Bar */}
@@ -358,7 +400,6 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                                 </button>
                               </div>
                             </div>
-
                           </div>
                         </div>
 
@@ -399,7 +440,6 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                             <span>Book Overview</span>
                           </button>
                         </div>
-
                       </div>
                     ))}
                   </div>
@@ -408,7 +448,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             )}
 
             {/* Tab 2: Saved Wishlist */}
-            {activeTab === 'wishlist' && (
+            {activeTab === "wishlist" && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200">
                   <div>
@@ -420,7 +460,8 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                     </p>
                   </div>
                   <span className="px-3 py-1 rounded-full bg-pink-500/10 text-pink-400 font-bold text-xs border border-pink-500/20 font-mono">
-                    {wishlistBooks.length} {wishlistBooks.length === 1 ? 'item' : 'items'}
+                    {wishlistBooks.length}{" "}
+                    {wishlistBooks.length === 1 ? "item" : "items"}
                   </span>
                 </div>
 
@@ -430,9 +471,12 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                       <Heart className="w-8 h-8 fill-pink-500/20" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="font-heading font-extrabold text-slate-900 text-base">Your Wishlist is Empty</h3>
+                      <h3 className="font-heading font-extrabold text-slate-900 text-base">
+                        Your Wishlist is Empty
+                      </h3>
                       <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-                        Click the heart icon on any eBook in the catalog to save titles you want to read later.
+                        Click the heart icon on any eBook in the catalog to save
+                        titles you want to read later.
                       </p>
                     </div>
                     <button
@@ -450,18 +494,22 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                         className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 shadow-md hover:border-slate-300 transition-all flex flex-col justify-between"
                       >
                         <div className="flex items-start gap-4">
-                          <div 
+                          <div
                             onClick={() => onSelectBook(book)}
                             className="cursor-pointer shrink-0 w-14 h-20 rounded-md overflow-hidden"
                           >
-                            <BookCover book={book} size="xs" showBadge={false} />
+                            <BookCover
+                              book={book}
+                              size="xs"
+                              showBadge={false}
+                            />
                           </div>
 
                           <div className="flex-1 min-w-0">
                             <span className="text-[10px] font-bold text-dodgerblue bg-dodgerblue/10 px-2 py-0.5 rounded border border-dodgerblue/20 uppercase font-mono">
                               {book.category}
                             </span>
-                            <h4 
+                            <h4
                               onClick={() => onSelectBook(book)}
                               className="font-heading font-bold text-sm text-slate-900 truncate mt-1 hover:text-dodgerblue cursor-pointer"
                             >
@@ -470,7 +518,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                             <p className="text-xs text-slate-500 truncate mt-0.5">
                               By {book.author}
                             </p>
-                            
+
                             <div className="flex items-baseline gap-2 mt-2">
                               <span className="text-sm font-extrabold text-dodgerblue">
                                 {formatPrice(book.priceKES)}
@@ -508,7 +556,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
             )}
 
             {/* Tab 3: Order History */}
-            {activeTab === 'orders' && (
+            {activeTab === "orders" && (
               <div className="space-y-4">
                 <div>
                   <h2 className="text-base sm:text-lg font-heading font-bold text-slate-900">
@@ -522,15 +570,18 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                 {orderTransactions.length === 0 ? (
                   <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3 shadow-xl">
                     <Receipt className="w-10 h-10 text-slate-500 mx-auto" />
-                    <h3 className="font-heading font-extrabold text-slate-900 text-base">No Order Receipts Yet</h3>
+                    <h3 className="font-heading font-extrabold text-slate-900 text-base">
+                      No Order Receipts Yet
+                    </h3>
                     <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                      All your M-Pesa payments and PDF orders will be documented here.
+                      All your M-Pesa payments and PDF orders will be documented
+                      here.
                     </p>
                   </div>
                 ) : (
                   <div className="space-y-3">
                     {orderTransactions.map((order) => (
-                      <div 
+                      <div
                         key={order.orderId}
                         className="p-5 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                       >
@@ -544,7 +595,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                             </span>
                           </div>
                           <p className="text-xs text-slate-600 mt-1">
-                            {order.items.map((i) => i.bookTitle).join(', ')}
+                            {order.items.map((i) => i.bookTitle).join(", ")}
                           </p>
                           <span className="text-[11px] text-slate-500 font-mono">
                             Date: {order.date} • Phone: {order.phoneNumber}
@@ -565,13 +616,11 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                 )}
               </div>
             )}
-
           </div>
         ) : (
           /* If user is NOT logged in: Show clean Sign In / M-Pesa lookup screen */
           <div className="max-w-md mx-auto py-6">
             <div className="p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-2xl text-center space-y-6">
-              
               <div className="space-y-2">
                 <div className="w-12 h-12 rounded-2xl bg-dodgerblue text-white flex items-center justify-center mx-auto shadow-md shadow-dodgerblue/20">
                   <User className="w-6 h-6" />
@@ -580,12 +629,16 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                   Sign In to Midusa
                 </h1>
                 <p className="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">
-                  Access your purchased eBooks, manage your wishlist, and retrieve your unique download links anytime.
+                  Access your purchased eBooks, manage your wishlist, and
+                  retrieve your unique download links anytime.
                 </p>
               </div>
 
               {/* M-Pesa Phone Quick Access */}
-              <form onSubmit={handleMpesaSignIn} className="p-4 rounded-2xl bg-dodgerblue/10 border border-dodgerblue/20 text-left space-y-2.5">
+              <form
+                onSubmit={handleMpesaSignIn}
+                className="p-4 rounded-2xl bg-dodgerblue/10 border border-dodgerblue/20 text-left space-y-2.5"
+              >
                 <label className="block text-xs font-bold text-emerald-300 flex items-center gap-1.5">
                   <Smartphone className="w-3.5 h-3.5 text-dodgerblue" />
                   Quick Access via M-Pesa Phone
@@ -609,7 +662,9 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
 
               <div className="relative flex py-1 items-center">
                 <div className="flex-grow border-t border-slate-200"></div>
-                <span className="flex-shrink mx-3 text-[11px] text-slate-500 uppercase font-medium">Or continue with</span>
+                <span className="flex-shrink mx-3 text-[11px] text-slate-500 uppercase font-medium">
+                  Or continue with
+                </span>
                 <div className="flex-grow border-t border-slate-200"></div>
               </div>
 
@@ -621,7 +676,7 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                   disabled={!!loadingProvider}
                   className="w-full py-3 px-4 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 font-bold text-xs sm:text-sm text-slate-700 shadow-sm flex items-center justify-center gap-3 transition-all active:scale-98 disabled:opacity-50 cursor-pointer"
                 >
-                  {loadingProvider === 'google' ? (
+                  {loadingProvider === "google" ? (
                     <div className="w-4 h-4 border-2 border-dodgerblue border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -652,11 +707,11 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
                   disabled={!!loadingProvider}
                   className="w-full py-3 px-4 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] font-bold text-xs sm:text-sm text-slate-900 shadow-sm flex items-center justify-center gap-3 transition-all active:scale-98 disabled:opacity-50 cursor-pointer"
                 >
-                  {loadingProvider === 'facebook' ? (
+                  {loadingProvider === "facebook" ? (
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                     </svg>
                   )}
                   <span>Continue with Facebook</span>
@@ -669,11 +724,9 @@ export const UserProfilePage: React.FC<UserProfilePageProps> = ({
               >
                 ← Return to Bookstore
               </button>
-
             </div>
           </div>
         )}
-
       </div>
     </div>
   );

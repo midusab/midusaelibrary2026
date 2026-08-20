@@ -1,0 +1,73 @@
+{
+  "collections": [
+    {
+      "name": "books",
+      "fields": [
+        { "name": "title", "type": "string" },
+        { "name": "author", "type": "string" },
+        { "name": "price", "type": "number" },
+        { "name": "rating", "type": "number" },
+        { "name": "reviews", "type": "number" },
+        { "name": "image", "type": "string" },
+        { "name": "coverColor", "type": "string" },
+        { "name": "description", "type": "string" },
+        { "name": "category", "type": "string" },
+        { "name": "pages", "type": "number", "optional": true },
+        { "name": "language", "type": "string", "optional": true },
+        { "name": "publishedYear", "type": "number", "optional": true },
+        { "name": "pdfUrl", "type": "string", "optional": true },
+        { "name": "createdAt", "type": "timestamp" },
+        { "name": "salesCount", "type": "number", "optional": true }
+      ],
+      "rules": {
+        "read": "true",
+        "write": "isAdmin()"
+      }
+    },
+    {
+      "name": "users",
+      "fields": [
+        { "name": "email", "type": "string" },
+        { "name": "role", "type": "string" },
+        { "name": "createdAt", "type": "timestamp" }
+      ],
+      "rules": {
+        "read": "isOwner(resource.id) || isAdmin()",
+        "write": "isOwner(resource.id) || isAdmin()"
+      }
+    },
+    {
+      "name": "orders",
+      "fields": [
+        { "name": "userId", "type": "string" },
+        { "name": "userEmail", "type": "string" },
+        { "name": "items", "type": "array" },
+        { "name": "totalAmount", "type": "number" },
+        { "name": "status", "type": "string" },
+        { "name": "mpesaReceipt", "type": "string", "optional": true },
+        { "name": "createdAt", "type": "timestamp" }
+      ],
+      "rules": {
+        "read": "isOwner(resource.data.userId) || isAdmin()",
+        "create": "isAuthenticated()",
+        "update": "isAdmin()",
+        "delete": "isAdmin()"
+      }
+    }
+  ],
+  "securityFunctions": [
+    {
+      "name": "isAuthenticated",
+      "body": "return request.auth != null;"
+    },
+    {
+      "name": "isOwner",
+      "args": ["userId"],
+      "body": "return request.auth != null && request.auth.uid == userId;"
+    },
+    {
+      "name": "isAdmin",
+      "body": "return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';"
+    }
+  ]
+}

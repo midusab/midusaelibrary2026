@@ -28,6 +28,7 @@ interface NavbarProps {
   onOpenAuthModal: () => void;
   onOpenSearchModal: () => void;
   onNavigateHome: () => void;
+  onNavigateAdmin?: () => void;
   onSelectCategory: (category: BookCategory | 'All') => void;
   selectedCategory: BookCategory | 'All';
   currentUser: UserProfile | null;
@@ -43,6 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenAuthModal,
   onOpenSearchModal,
   onNavigateHome,
+  onNavigateAdmin,
   onSelectCategory,
   selectedCategory,
   currentUser,
@@ -195,6 +197,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {cartCount}
               </span>
             </button>
+
+            {/* Admin Dashboard Button */}
+            {currentUser?.isAdmin && onNavigateAdmin && (
+              <button
+                onClick={onNavigateAdmin}
+                className="hidden md:flex items-center gap-2 p-1.5 px-3 rounded-xl bg-dodgerblue text-white shadow-sm transition-colors cursor-pointer text-xs font-semibold"
+              >
+                Admin
+              </button>
+            )}
 
             {/* Auth / Profile Button */}
             {currentUser ? (

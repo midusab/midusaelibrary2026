@@ -9,7 +9,8 @@ export type AppView =
   | 'refund' 
   | 'reader' 
   | 'bestsellers' 
-  | 'newarrivals';
+  | 'newarrivals'
+  | 'admin';
 
 export type BookCategory = 
   | 'Self Development'
@@ -126,6 +127,7 @@ export interface UserProfile {
   phone?: string;
   avatar: string;
   provider: 'google' | 'facebook' | 'mpesa' | 'email';
+  isAdmin?: boolean;
 }
 
 export interface PurchasedBook {
